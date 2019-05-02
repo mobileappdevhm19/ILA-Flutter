@@ -1,12 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:ila/views/courses/courseWidget.dart';
+import 'package:ila/views/lectures/lectureWidget.dart';
 
 class CoursesWidget extends StatelessWidget {
   final List<Course> items = [
-    Course(title: 'Mobile App Development', description: 'Flutter Apps'),
-    Course(title: 'Signal Processing', description: 'Digital Signal Systems'),
-    Course(title: 'Autonomous Systems', description: 'Indoor Navigation'),
-    Course(title: 'Multisensor Navigation', description: 'Navigation Algorithmen')
+    Course(
+        title: 'Mobile App Development',
+        description: 'Flutter Apps',
+        lectures: [
+          Lecture(title: 'Lecture 1'),
+          Lecture(title: 'Lecture 2'),
+          Lecture(title: 'Lecture 3'),
+          Lecture(title: 'Lecture 4')
+        ]),
+    Course(
+        title: 'Signal Processing',
+        description: 'Digital Signal Systems',
+        lectures: [
+          Lecture(title: 'Lecture 1'),
+          Lecture(title: 'Lecture 2'),
+          Lecture(title: 'Lecture 3'),
+          Lecture(title: 'Lecture 4')
+        ]),
+    Course(
+        title: 'Autonomous Systems',
+        description: 'Indoor Navigation',
+        lectures: [
+          Lecture(title: 'Lecture 1'),
+          Lecture(title: 'Lecture 2'),
+          Lecture(title: 'Lecture 3'),
+          Lecture(title: 'Lecture 4')
+        ]),
+    Course(
+        title: 'Multisensor Navigation',
+        description: 'Navigation Algorithmen',
+        lectures: [
+          Lecture(title: 'Lecture 1'),
+          Lecture(title: 'Lecture 2'),
+          Lecture(title: 'Lecture 3'),
+          Lecture(title: 'Lecture 4')
+        ])
   ];
 
   @override
@@ -36,6 +69,7 @@ class CoursesWidget extends StatelessWidget {
 
 class Course {
   String title, description;
+  List<Lecture> lectures;
 
-  Course({this.title, this.description});
+  Course({this.title, this.description, this.lectures});
 }
