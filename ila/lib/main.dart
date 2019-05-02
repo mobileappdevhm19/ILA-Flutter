@@ -23,7 +23,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    Icon(Icons.looks_one),
+    CoursesWidget(),
     null,
     Icon(Icons.threed_rotation),
   ];
@@ -72,6 +72,64 @@ class State2 extends StatelessWidget {
       appBar: AppBar(
         title: Text('State2'),
       ),
+    );
+  }
+}
+
+class CoursesWidget extends StatelessWidget {
+  final List<Course> items = [
+    Course(title: 'Mobile App Development', description: 'Flutter Apps'),
+    Course(title: 'Signal Processing', description: 'Digital Signal Systems'),
+    Course(title: 'Autonomous Systems', description: 'Indoor Navigation'),
+    Course(title: 'Multisensor Navigation', description: 'Navigation Algorithmen')
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // Let the ListView know how many items it needs to build
+      itemCount: items.length,
+      // Provide a builder function. This is where the magic happens! We'll
+      // convert each item into a Widget based on the type of item it is.
+      itemBuilder: (context, index) {
+        final item = items[index];
+
+        return ListTile(
+          title: Text(item.title),
+          subtitle: Text(item.description),
+          onTap: () => onTapped(context, item),
+        );
+      },
+    );
+  }
+
+  onTapped(BuildContext context, Course course) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => CourseWidget(course: course)));
+  }
+}
+
+class Course {
+  String title, description;
+
+  Course({this.title, this.description});
+}
+
+class CourseWidget extends StatefulWidget {
+  final Course course;
+
+  CourseWidget({this.course, Key key}) : super(key: key);
+
+  @override
+  CourseWidgetState createState() => CourseWidgetState();
+}
+
+class CourseWidgetState extends State<CourseWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(this.widget.course.title),),
+      body: Text(this.widget.course.title),
     );
   }
 }
