@@ -1,4 +1,9 @@
 # Flutter Repository of Team#1
+|master|develop|
+|------|-------|
+|[![Build Status](https://travis-ci.org/mobileappdevhm19/ILA-Flutter.svg?branch=master)](https://travis-ci.org/mobileappdevhm19/ILA-Flutter)[![Coverage Status](https://coveralls.io/repos/github/mobileappdevhm19/ILA-Flutter/badge.svg?branch=master)](https://coveralls.io/github/mobileappdevhm19/ILA-Flutter?branch=master)|[![Build Status](https://travis-ci.org/mobileappdevhm19/ILA-Flutter.svg?branch=master)](https://travis-ci.org/mobileappdevhm19/ILA-Flutter)[![Coverage Status](https://coveralls.io/repos/github/mobileappdevhm19/ILA-Flutter/badge.svg?branch=develop)](https://coveralls.io/github/mobileappdevhm19/ILA-Flutter?branch=develop)|
+
+
 ILA (Interactive Lecture Assistant)
 
 An App to enable Student-Professor and Student-Student interaction. 
