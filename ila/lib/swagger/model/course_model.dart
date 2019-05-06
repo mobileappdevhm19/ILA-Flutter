@@ -14,13 +14,16 @@ class CourseModel {
   int ownerId = null;
   
 
-  List<TokenModel> tokens = [];
+  List<TokenModel> courseTokens = [];
+  
+
+  List<MemberModel> members = [];
   
   CourseModel();
 
   @override
   String toString() {
-    return 'CourseModel[id=$id, title=$title, description=$description, ownerId=$ownerId, tokens=$tokens, ]';
+    return 'CourseModel[id=$id, title=$title, description=$description, ownerId=$ownerId, courseTokens=$courseTokens, members=$members, ]';
   }
 
   CourseModel.fromJson(Map<String, dynamic> json) {
@@ -37,8 +40,11 @@ class CourseModel {
     ownerId =
         json['ownerId']
     ;
-    tokens =
-      TokenModel.listFromJson(json['tokens'])
+    courseTokens =
+      TokenModel.listFromJson(json['courseTokens'])
+;
+    members =
+      MemberModel.listFromJson(json['members'])
 ;
   }
 
@@ -48,7 +54,8 @@ class CourseModel {
       'title': title,
       'description': description,
       'ownerId': ownerId,
-      'tokens': tokens
+      'courseTokens': courseTokens,
+      'members': members
      };
   }
 
