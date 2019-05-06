@@ -56,6 +56,8 @@ class ApiClient {
           return new CourseModel.fromJson(value);
         case 'CourseUpdateModel':
           return new CourseUpdateModel.fromJson(value);
+        case 'CoursesResponseModel':
+          return new CoursesResponseModel.fromJson(value);
         case 'GenericErrorResponse':
           return new GenericErrorResponse.fromJson(value);
         case 'LectureCreateModel':
@@ -66,6 +68,8 @@ class ApiClient {
           return new LectureUpdateModel.fromJson(value);
         case 'LectureVisibleModel':
           return new LectureVisibleModel.fromJson(value);
+        case 'MemberModel':
+          return new MemberModel.fromJson(value);
         case 'TokenModel':
           return new TokenModel.fromJson(value);
         default:

@@ -23,11 +23,13 @@ part 'model/body1.dart';
 part 'model/course_create_model.dart';
 part 'model/course_model.dart';
 part 'model/course_update_model.dart';
+part 'model/courses_response_model.dart';
 part 'model/generic_error_response.dart';
 part 'model/lecture_create_model.dart';
 part 'model/lecture_model.dart';
 part 'model/lecture_update_model.dart';
 part 'model/lecture_visible_model.dart';
+part 'model/member_model.dart';
 part 'model/token_model.dart';
 
 
