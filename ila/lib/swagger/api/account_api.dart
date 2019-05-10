@@ -2,24 +2,21 @@ part of swagger.api;
 
 
 
-class AuthApi {
+class AccountApi {
   final ApiClient apiClient;
 
-  AuthApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  AccountApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
-  /// User login
+  /// 
   ///
   /// 
-  Future<AuthLoginResponse> authLoginPost(AuthLoginModel body) async {
-    Object postBody = body;
+  Future<MultipartFile> accountLogout() async {
+    Object postBody = null;
 
     // verify required params are set
-    if(body == null) {
-     throw new ApiException(400, "Missing required param: body");
-    }
 
     // create path and map variables
-    String path = "/auth/login".replaceAll("{format}","json");
+    String path = "/api/Account/logout".replaceAll("{format}","json");
 
     // query params
     List<QueryParam> queryParams = [];
@@ -29,7 +26,7 @@ class AuthApi {
     List<String> contentTypes = [];
 
     String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = [];
+    List<String> authNames = ["JWT"];
 
     if(contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
@@ -54,31 +51,31 @@ class AuthApi {
       throw new ApiException(response.statusCode, response.body);
     } else if(response.body != null) {
       return 
-          apiClient.deserialize(response.body, 'AuthLoginResponse') as AuthLoginResponse ;
+          apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile ;
     } else {
       return null;
     }
   }
-  /// Users can register themselfs
+  /// 
   ///
   /// 
-  Future<AuthRegisterResponse> authRegisterPost(AuthRegisterModel body) async {
-    Object postBody = body;
+  Future<JsonWebToken> accountSignIn(SignIn request) async {
+    Object postBody = request;
 
     // verify required params are set
-    if(body == null) {
-     throw new ApiException(400, "Missing required param: body");
+    if(request == null) {
+     throw new ApiException(400, "Missing required param: request");
     }
 
     // create path and map variables
-    String path = "/auth/register".replaceAll("{format}","json");
+    String path = "/api/Account/login".replaceAll("{format}","json");
 
     // query params
     List<QueryParam> queryParams = [];
     Map<String, String> headerParams = {};
     Map<String, String> formParams = {};
     
-    List<String> contentTypes = [];
+    List<String> contentTypes = ["application/json-patch+json","application/json","text/json","application/_*+json"];
 
     String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = [];
@@ -106,7 +103,59 @@ class AuthApi {
       throw new ApiException(response.statusCode, response.body);
     } else if(response.body != null) {
       return 
-          apiClient.deserialize(response.body, 'AuthRegisterResponse') as AuthRegisterResponse ;
+          apiClient.deserialize(response.body, 'JsonWebToken') as JsonWebToken ;
+    } else {
+      return null;
+    }
+  }
+  /// 
+  ///
+  /// 
+  Future<MultipartFile> accountSignUp(SignUp request) async {
+    Object postBody = request;
+
+    // verify required params are set
+    if(request == null) {
+     throw new ApiException(400, "Missing required param: request");
+    }
+
+    // create path and map variables
+    String path = "/api/Account/signup".replaceAll("{format}","json");
+
+    // query params
+    List<QueryParam> queryParams = [];
+    Map<String, String> headerParams = {};
+    Map<String, String> formParams = {};
+    
+    List<String> contentTypes = ["application/json-patch+json","application/json","text/json","application/_*+json"];
+
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+    List<String> authNames = [];
+
+    if(contentType.startsWith("multipart/form-data")) {
+      bool hasFields = false;
+      MultipartRequest mp = new MultipartRequest(null, null);
+      
+      if(hasFields)
+        postBody = mp;
+    }
+    else {
+          }
+
+    var response = await apiClient.invokeAPI(path,
+                                             'POST',
+                                             queryParams,
+                                             postBody,
+                                             headerParams,
+                                             formParams,
+                                             contentType,
+                                             authNames);
+
+    if(response.statusCode >= 400) {
+      throw new ApiException(response.statusCode, response.body);
+    } else if(response.body != null) {
+      return 
+          apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile ;
     } else {
       return null;
     }

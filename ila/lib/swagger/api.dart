@@ -3,6 +3,8 @@ library swagger.api;
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:jaguar_jwt/jaguar_jwt.dart';
+import 'package:ila/helpers/userException.dart';
 
 part 'api_client.dart';
 part 'api_helper.dart';
@@ -10,27 +12,25 @@ part 'api_exception.dart';
 part 'auth/authentication.dart';
 part 'auth/oauth.dart';
 
-part 'api/auth_api.dart';
+part 'api/account_api.dart';
 part 'api/courses_api.dart';
 part 'api/lectures_api.dart';
 
-part 'model/auth_login_model.dart';
-part 'model/auth_login_response.dart';
-part 'model/auth_register_model.dart';
-part 'model/auth_register_response.dart';
-part 'model/body.dart';
-part 'model/body1.dart';
-part 'model/course_create_model.dart';
-part 'model/course_model.dart';
-part 'model/course_update_model.dart';
-part 'model/courses_response_model.dart';
-part 'model/generic_error_response.dart';
-part 'model/lecture_create_model.dart';
-part 'model/lecture_model.dart';
-part 'model/lecture_update_model.dart';
-part 'model/lecture_visible_model.dart';
-part 'model/member_model.dart';
-part 'model/token_model.dart';
+part 'model/answer.dart';
+part 'model/course.dart';
+part 'model/course_create_upate_model.dart';
+part 'model/course_member.dart';
+part 'model/course_token.dart';
+part 'model/identity_user_of_string.dart';
+part 'model/json_web_token.dart';
+part 'model/lecture.dart';
+part 'model/lecture_create_update_model.dart';
+part 'model/pause.dart';
+part 'model/question.dart';
+part 'model/sign_in.dart';
+part 'model/sign_up.dart';
+part 'model/identity_user.dart';
+part 'model/ila_user.dart';
 
 
 ApiClient defaultApiClient = new ApiClient();
