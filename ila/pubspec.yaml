@@ -1,5 +1,5 @@
 name: ila
-description: A new Flutter project.
+description: Interactive Lecture Assistent
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -24,6 +24,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   http: any
+  scoped_model: any
+  jaguar_jwt: any
+  flutter_secure_storage: any
 
 dev_dependencies:
   flutter_test:
