@@ -14,9 +14,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Timer _timer;
+
   startTime() async {
     int counter = 0;
-    return Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final state = ScopedModel.of<AuthModel>(context).getStatus();
       if (counter++ >= Config.SplashScreenDuration ||
           state == AuthStatus.None ||
@@ -44,6 +46,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     startTime();
     ScopedModel.of<AuthModel>(context).init();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
