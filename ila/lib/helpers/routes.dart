@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ila/views/courseView.dart';
 import 'package:ila/views/homeView.dart';
 import 'package:ila/views/loginView.dart';
 import 'package:ila/views/settingsView.dart';
@@ -25,6 +26,9 @@ Widget _buildRoute({
       return LoginView();
     case '/settings':
       return SettingsView();
+    case '/course':
+      Course course = arguments as Course;
+      return CourseView(course: course,);
     default:
       throw 'Route $routeName is not defined';
   }
