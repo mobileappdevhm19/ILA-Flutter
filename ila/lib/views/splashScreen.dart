@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:ila/config.dart';
 import 'package:ila/helpers/platformScaffold.dart';
 import 'package:ila/models/AuthModel.dart';
-import 'package:ila/swagger/api.dart';
+import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class SplashScreen extends StatefulWidget {

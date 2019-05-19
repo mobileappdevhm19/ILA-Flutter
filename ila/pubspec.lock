@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.8"
+    version: "2.1.0"
   auth_header:
     dependency: transitive
     description:
@@ -75,12 +75,12 @@ packages:
     source: sdk
     version: "0.0.0"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.0+2"
+    version: "0.11.3+17"
   http_parser:
     dependency: transitive
     description:
@@ -88,8 +88,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.3"
-  jaguar_jwt:
+  ila_swagger:
     dependency: "direct main"
+    description:
+      path: "..\\ila_swagger"
+      relative: true
+    source: path
+    version: "1.0.0"
+  jaguar_jwt:
+    dependency: transitive
     description:
       name: jaguar_jwt
       url: "https://pub.dartlang.org"
@@ -101,7 +108,7 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.3+1"
+    version: "0.12.5"
   meta:
     dependency: transitive
     description:
@@ -122,14 +129,14 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   quiver:
     dependency: transitive
     description:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   scoped_model:
     dependency: "direct main"
     description:
@@ -148,7 +155,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.4"
+    version: "1.5.5"
   stack_trace:
     dependency: transitive
     description:
@@ -162,7 +169,7 @@ packages:
       name: stream_channel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.8"
+    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
@@ -183,7 +190,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.2"
+    version: "0.2.4"
   typed_data:
     dependency: transitive
     description:
@@ -199,4 +206,4 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.1.0 <3.0.0"
+  dart: ">=2.2.0 <3.0.0"

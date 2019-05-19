@@ -3,6 +3,7 @@ library ila_swagger.api;
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:jaguar_jwt/jaguar_jwt.dart';
 
 part 'api_client.dart';
 part 'api_helper.dart';
@@ -32,5 +33,6 @@ part 'model/sign_up.dart';
 part 'model/identity_user.dart';
 part 'model/ila_user.dart';
 
+part 'userException.dart';
 
 ApiClient defaultApiClient = new ApiClient();

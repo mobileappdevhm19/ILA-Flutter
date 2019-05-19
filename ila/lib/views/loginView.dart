@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
-import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
+import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LoginView extends StatefulWidget {

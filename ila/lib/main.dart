@@ -4,6 +4,7 @@ import 'package:ila/helpers/routes.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/views/splashScreen.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:ila_swagger/api.dart';
 
 void main() => runApp(MyApp());
 

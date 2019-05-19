@@ -3,7 +3,7 @@ import 'package:ila/views/courseView.dart';
 import 'package:ila/views/homeView.dart';
 import 'package:ila/views/loginView.dart';
 import 'package:ila/views/settingsView.dart';
-import 'package:ila/swagger/api.dart';
+import 'package:ila_swagger/api.dart';
 
 Widget makeRoute(
     {@required BuildContext context,
