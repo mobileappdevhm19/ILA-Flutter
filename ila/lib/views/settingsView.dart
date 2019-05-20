@@ -28,8 +28,8 @@ class _SettingsViewState extends State<SettingsView> {
               title: Text(account['username']),
               trailing: IconButton(
                   icon: Icon(Icons.exit_to_app),
-                  onPressed: () {
-                    authmodel.logout();
+                  onPressed: () async {
+                    await authmodel.logout();
                     Navigator.popUntil(context, (route) => route.isFirst);
                     Navigator.pushReplacementNamed(context, '/login');
                   }),

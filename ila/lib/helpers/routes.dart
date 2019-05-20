@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ila/views/courseView.dart';
 import 'package:ila/views/homeView.dart';
 import 'package:ila/views/loginView.dart';
+import 'package:ila/views/registrationView.dart';
 import 'package:ila/views/settingsView.dart';
 import 'package:ila_swagger/api.dart';
 
@@ -24,6 +25,8 @@ Widget _buildRoute({
       return HomeView();
     case '/login':
       return LoginView();
+    case '/registration':
+      return RegistrationView();
     case '/settings':
       return SettingsView();
     case '/course':

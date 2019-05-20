@@ -8,7 +8,7 @@ class AuthModel extends Model {
   AuthStatus getStatus() => defaultApiClient.getStatus();
 
   Future init() async {
-    try {
+   try {
       defaultApiClient.username = await storage.read(key: 'username');
       defaultApiClient.password = await storage.read(key: 'password');
     } catch (error) {

@@ -4,6 +4,8 @@ import 'package:ila/models/AuthModel.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../main.dart';
+
 class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -16,12 +18,14 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(
           title: Text(Config.AppTitle),
         ),
         body: Center(
             child: Builder(
-                builder: (context) => ListView(
+                builder: (context) =>
+                    ListView(
                       shrinkWrap: true,
                       padding: EdgeInsets.all(15.0),
                       children: <Widget>[
@@ -41,7 +45,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "BENUTZERNAME",
+                                  "USERNAME",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -53,7 +57,10 @@ class _LoginViewState extends State<LoginView> {
                           ],
                         ),
                         new Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           margin: const EdgeInsets.only(
                               left: 40.0, right: 40.0, top: 10.0),
                           alignment: Alignment.center,
@@ -66,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                           padding:
-                              const EdgeInsets.only(left: 0.0, right: 10.0),
+                          const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -94,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "PASSWORT",
+                                  "PASSWORD",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -106,7 +113,10 @@ class _LoginViewState extends State<LoginView> {
                           ],
                         ),
                         new Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           margin: const EdgeInsets.only(
                               left: 40.0, right: 40.0, top: 10.0),
                           alignment: Alignment.center,
@@ -119,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                           padding:
-                              const EdgeInsets.only(left: 0.0, right: 10.0),
+                          const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -143,7 +153,10 @@ class _LoginViewState extends State<LoginView> {
                           height: 24.0,
                         ),
                         new Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           margin: const EdgeInsets.only(
                               left: 30.0, right: 30.0, top: 20.0),
                           alignment: Alignment.center,
@@ -153,7 +166,7 @@ class _LoginViewState extends State<LoginView> {
                                 child: new FlatButton(
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
-                                        new BorderRadius.circular(30.0),
+                                    new BorderRadius.circular(30.0),
                                   ),
                                   color: Config.PrimaryColor,
                                   onPressed: () =>
@@ -165,11 +178,57 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                     child: new Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      MainAxisAlignment.center,
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
                                             "LOGIN",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        new Container(
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          margin: const EdgeInsets.only(
+                              left: 30.0, right: 30.0, top: 20.0),
+                          alignment: Alignment.center,
+                          child: new Row(
+                            children: <Widget>[
+                              new Expanded(
+                                child: new FlatButton(
+                                  shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(30.0),
+                                  ),
+                                  color: Config.AppColorDark,
+                                  onPressed: () =>
+                                      Navigator.pushNamed(context,
+                                          '/registration'),
+                                  child: new Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20.0,
+                                      horizontal: 20.0,
+                                    ),
+                                    child: new Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        new Expanded(
+                                          child: Text(
+                                            "REGISTRATION",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -194,11 +253,14 @@ class _LoginViewState extends State<LoginView> {
     await auth
         .login(_username, _password)
         .then((_) => Navigator.pushReplacementNamed(context, '/home'))
-        .catchError((e) => Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text(e is UserException
-                  ? (e as UserException).message
-                  : 'Unbekannter Fehler ist aufgetretten'),
-              duration: Duration(seconds: 4),
-            )));
+        .catchError((e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(e is UserException
+            ? (e as UserException).message
+            : 'Unbekannter Fehler ist aufgetretten'),
+        duration: Duration(seconds: 4),
+      ));
+      print(e.toString());
+    });
   }
 }
