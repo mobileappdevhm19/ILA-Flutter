@@ -10,14 +10,17 @@ All URIs are relative to *https://ila.dev.kirschbaum.bayern*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**coursesDeleteCourse**](CoursesApi.md#coursesDeleteCourse) | **DELETE** /api/Courses/{id} | 
-[**coursesGenerateToken**](CoursesApi.md#coursesGenerateToken) | **POST** /api/Courses/generateToken | 
+[**coursesDeleteToken**](CoursesApi.md#coursesDeleteToken) | **DELETE** /api/Courses/deleteToken/{tokenId} | 
+[**coursesGenerateToken**](CoursesApi.md#coursesGenerateToken) | **POST** /api/Courses/generateToken/{courseId} | 
 [**coursesGetMemberCourse**](CoursesApi.md#coursesGetMemberCourse) | **GET** /api/Courses/member/{id} | 
 [**coursesGetMemberCourses**](CoursesApi.md#coursesGetMemberCourses) | **GET** /api/Courses/member | 
 [**coursesGetOwnerCourse**](CoursesApi.md#coursesGetOwnerCourse) | **GET** /api/Courses/owner/{id} | 
 [**coursesGetOwnerCourses**](CoursesApi.md#coursesGetOwnerCourses) | **GET** /api/Courses/owner | 
-[**coursesJoinCourse**](CoursesApi.md#coursesJoinCourse) | **POST** /api/Courses/join | 
+[**coursesJoinCourse**](CoursesApi.md#coursesJoinCourse) | **POST** /api/Courses/join/{courseId} | 
+[**coursesLeaveCourse**](CoursesApi.md#coursesLeaveCourse) | **POST** /api/Courses/leave/{courseId} | 
 [**coursesPostCourse**](CoursesApi.md#coursesPostCourse) | **POST** /api/Courses | 
 [**coursesPutCourse**](CoursesApi.md#coursesPutCourse) | **PUT** /api/Courses/{id} | 
+[**coursesUpdateToken**](CoursesApi.md#coursesUpdateToken) | **PUT** /api/Courses/updateToken/{tokenId} | 
 
 
 # **coursesDeleteCourse**
@@ -65,6 +68,51 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **coursesDeleteToken**
+> MultipartFile coursesDeleteToken(tokenId)
+
+
+
+### Example 
+```dart
+import 'package:ila_swagger/api.dart';
+// TODO Configure API key authorization: JWT
+//ila_swagger.api.Configuration.apiKey{'Authorization'} = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
+
+var api_instance = new CoursesApi();
+var tokenId = 56; // int | 
+
+try { 
+    var result = api_instance.coursesDeleteToken(tokenId);
+    print(result);
+} catch (e) {
+    print("Exception when calling CoursesApi->coursesDeleteToken: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tokenId** | **int**|  | 
+
+### Return type
+
+[**MultipartFile**](File.md)
+
+### Authorization
+
+[JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **coursesGenerateToken**
 > MultipartFile coursesGenerateToken(courseId)
 
@@ -93,7 +141,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **courseId** | **int**|  | [optional] 
+ **courseId** | **int**|  | 
 
 ### Return type
 
@@ -311,8 +359,53 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **courseId** | **int**|  | [optional] 
+ **courseId** | **int**|  | 
  **token** | **String**|  | [optional] 
+
+### Return type
+
+[**MultipartFile**](File.md)
+
+### Authorization
+
+[JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **coursesLeaveCourse**
+> MultipartFile coursesLeaveCourse(courseId)
+
+
+
+### Example 
+```dart
+import 'package:ila_swagger/api.dart';
+// TODO Configure API key authorization: JWT
+//ila_swagger.api.Configuration.apiKey{'Authorization'} = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
+
+var api_instance = new CoursesApi();
+var courseId = 56; // int | 
+
+try { 
+    var result = api_instance.coursesLeaveCourse(courseId);
+    print(result);
+} catch (e) {
+    print("Exception when calling CoursesApi->coursesLeaveCourse: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **courseId** | **int**|  | 
 
 ### Return type
 
@@ -375,7 +468,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **coursesPutCourse**
-> MultipartFile coursesPutCourse(id, courseModel)
+> Course coursesPutCourse(id, courseModel)
 
 
 
@@ -408,7 +501,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MultipartFile**](File.md)
+[**Course**](Course.md)
 
 ### Authorization
 
@@ -417,7 +510,54 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **coursesUpdateToken**
+> CourseToken coursesUpdateToken(tokenId, state)
+
+
+
+### Example 
+```dart
+import 'package:ila_swagger/api.dart';
+// TODO Configure API key authorization: JWT
+//ila_swagger.api.Configuration.apiKey{'Authorization'} = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
+
+var api_instance = new CoursesApi();
+var tokenId = 56; // int | 
+var state = true; // bool | 
+
+try { 
+    var result = api_instance.coursesUpdateToken(tokenId, state);
+    print(result);
+} catch (e) {
+    print("Exception when calling CoursesApi->coursesUpdateToken: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tokenId** | **int**|  | 
+ **state** | **bool**|  | [optional] 
+
+### Return type
+
+[**CourseToken**](CourseToken.md)
+
+### Authorization
+
+[JWT](../README.md#JWT)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

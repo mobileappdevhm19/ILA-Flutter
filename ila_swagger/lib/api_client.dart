@@ -67,6 +67,8 @@ class ApiClient {
           return new Pause.fromJson(value);
         case 'Question':
           return new Question.fromJson(value);
+        case 'QuestionCreate':
+          return new QuestionCreate.fromJson(value);
         case 'SignIn':
           return new SignIn.fromJson(value);
         case 'SignUp':

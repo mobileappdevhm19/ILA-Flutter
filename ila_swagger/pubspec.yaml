@@ -1,5 +1,5 @@
 name: ila_swagger
-version: 1.0.0
+version: 1.0.1
 description: Swagger API client
 dependencies:
   http: '>=0.11.1 <0.12.0'
