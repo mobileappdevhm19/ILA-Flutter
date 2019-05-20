@@ -28,6 +28,7 @@ part 'model/lecture.dart';
 part 'model/lecture_create_update_model.dart';
 part 'model/pause.dart';
 part 'model/question.dart';
+part 'model/question_create.dart';
 part 'model/sign_in.dart';
 part 'model/sign_up.dart';
 part 'model/identity_user.dart';
