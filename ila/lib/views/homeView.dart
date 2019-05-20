@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
-import 'package:ila/swagger/api.dart';
+import 'package:ila_swagger/api.dart';
 
 class HomeView extends StatefulWidget {
   @override

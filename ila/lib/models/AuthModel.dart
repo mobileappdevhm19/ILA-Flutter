@@ -1,6 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:ila/helpers/userException.dart';
-import 'package:ila/swagger/api.dart';
+import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AuthModel extends Model {
