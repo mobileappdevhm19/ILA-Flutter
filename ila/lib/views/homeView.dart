@@ -88,6 +88,12 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+          onPressed: ()
+           => Navigator.of(context).pushNamed('/addCourse'),
+      ),
     );
+
   }
 }
