@@ -14,6 +14,10 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    loadState();
+  }
+
+  void loadState() {
 
     CoursesApi().coursesGetMemberCourses().then((courses) {
       _courses = courses;
@@ -87,6 +91,13 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+          onPressed: ()
+           => Navigator.of(context)
+               .pushNamed('/addCourse')
+               .then((_) => loadState()),
       ),
     );
   }
