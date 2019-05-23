@@ -1,14 +1,13 @@
 part of ila_swagger.api;
 
-
 class CoursesApi {
   final ApiClient apiClient;
 
   CoursesApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
-  /// 
   ///
-  /// 
+  ///
+  ///
   Future<Course> coursesDeleteCourse(int id) async {
     Object postBody = null;
 
@@ -18,8 +17,9 @@ class CoursesApi {
     }
 
     // create path and map variables
-    String path = "/api/Courses/{id}".replaceAll("{format}", "json").replaceAll(
-        "{" + "id" + "}", id.toString());
+    String path = "/api/Courses/{id}"
+        .replaceAll("{format}", "json")
+        .replaceAll("{" + "id" + "}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -28,35 +28,24 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'DELETE',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'DELETE', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'Course') as Course;
+      return apiClient.deserialize(response.body, 'Course') as Course;
     } else {
       return null;
     }
@@ -64,7 +53,7 @@ class CoursesApi {
 
   ///
   ///
-  /// 
+  ///
   Future<MultipartFile> coursesDeleteToken(int tokenId) async {
     Object postBody = null;
 
@@ -74,9 +63,9 @@ class CoursesApi {
     }
 
     // create path and map variables
-    String path = "/api/Courses/deleteToken/{tokenId}".replaceAll(
-        "{format}", "json").replaceAll(
-        "{" + "tokenId" + "}", tokenId.toString());
+    String path = "/api/Courses/deleteToken/{tokenId}"
+        .replaceAll("{format}", "json")
+        .replaceAll("{" + "tokenId" + "}", tokenId.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -85,44 +74,30 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'DELETE',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'DELETE', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
     }
+    return null;
   }
 
   ///
   ///
-  /// 
-  Future<MultipartFile> coursesGenerateToken(int courseId) async {
+  ///
+  Future<CourseToken> coursesGenerateToken(int courseId) async {
     Object postBody = null;
 
     // verify required params are set
@@ -131,9 +106,9 @@ class CoursesApi {
     }
 
     // create path and map variables
-    String path = "/api/Courses/generateToken/{courseId}".replaceAll(
-        "{format}", "json").replaceAll(
-        "{" + "courseId" + "}", courseId.toString());
+    String path = "/api/Courses/generateToken/{courseId}"
+        .replaceAll("{format}", "json")
+        .replaceAll("{" + "courseId" + "}", courseId.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -142,35 +117,24 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'POST',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'POST', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
+      return apiClient.deserialize(response.body, 'CourseToken') as CourseToken;
     } else {
       return null;
     }
@@ -178,7 +142,7 @@ class CoursesApi {
 
   ///
   ///
-  /// 
+  ///
   Future<Course> coursesGetMemberCourse(int id) async {
     Object postBody = null;
 
@@ -199,35 +163,24 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'GET',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'GET', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'Course') as Course;
+      return apiClient.deserialize(response.body, 'Course') as Course;
     } else {
       return null;
     }
@@ -235,7 +188,7 @@ class CoursesApi {
 
   ///
   ///
-  /// 
+  ///
   Future<List<Course>> coursesGetMemberCourses() async {
     Object postBody = null;
 
@@ -251,36 +204,26 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'GET',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'GET', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        (apiClient.deserialize(response.body, 'List<Course>') as List).map((
-            item) => item as Course).toList();
+      return (apiClient.deserialize(response.body, 'List<Course>') as List)
+          .map((item) => item as Course)
+          .toList();
     } else {
       return null;
     }
@@ -288,7 +231,7 @@ class CoursesApi {
 
   ///
   ///
-  /// 
+  ///
   Future<Course> coursesGetOwnerCourse(int id) async {
     Object postBody = null;
 
@@ -309,35 +252,24 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'GET',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'GET', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'Course') as Course;
+      return apiClient.deserialize(response.body, 'Course') as Course;
     } else {
       return null;
     }
@@ -345,7 +277,7 @@ class CoursesApi {
 
   ///
   ///
-  /// 
+  ///
   Future<List<Course>> coursesGetOwnerCourses() async {
     Object postBody = null;
 
@@ -361,36 +293,26 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'GET',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'GET', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        (apiClient.deserialize(response.body, 'List<Course>') as List).map((
-            item) => item as Course).toList();
+      return (apiClient.deserialize(response.body, 'List<Course>') as List)
+          .map((item) => item as Course)
+          .toList();
     } else {
       return null;
     }
@@ -398,9 +320,8 @@ class CoursesApi {
 
   ///
   ///
-  /// 
-  Future<MultipartFile> coursesJoinCourse(int courseId,
-      { String token }) async {
+  ///
+  Future<MultipartFile> coursesJoinCourse(int courseId, {String token}) async {
     Object postBody = null;
 
     // verify required params are set
@@ -418,49 +339,35 @@ class CoursesApi {
     Map<String, String> headerParams = {};
     Map<String, String> formParams = {};
     if (token != null) {
-      queryParams.addAll(
-          _convertParametersForCollectionFormat("", "token", token));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat("", "token", token));
     }
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'POST',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'POST', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
     }
+    return null;
   }
 
   ///
   ///
-  /// 
+  ///
   Future<MultipartFile> coursesLeaveCourse(int courseId) async {
     Object postBody = null;
 
@@ -481,43 +388,29 @@ class CoursesApi {
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'POST',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'POST', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
     }
+    return null;
   }
 
   ///
   ///
-  /// 
+  ///
   Future<Course> coursesPostCourse(CourseCreateUpateModel courseModel) async {
     Object postBody = courseModel;
 
@@ -541,35 +434,24 @@ class CoursesApi {
       "application/_*+json"
     ];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'POST',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'POST', queryParams,
+        postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'Course') as Course;
+      return apiClient.deserialize(response.body, 'Course') as Course;
     } else {
       return null;
     }
@@ -577,9 +459,9 @@ class CoursesApi {
 
   ///
   ///
-  /// 
-  Future<Course> coursesPutCourse(int id,
-      CourseCreateUpateModel courseModel) async {
+  ///
+  Future<Course> coursesPutCourse(
+      int id, CourseCreateUpateModel courseModel) async {
     Object postBody = courseModel;
 
     // verify required params are set
@@ -591,8 +473,9 @@ class CoursesApi {
     }
 
     // create path and map variables
-    String path = "/api/Courses/{id}".replaceAll("{format}", "json").replaceAll(
-        "{" + "id" + "}", id.toString());
+    String path = "/api/Courses/{id}"
+        .replaceAll("{format}", "json")
+        .replaceAll("{" + "id" + "}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -606,35 +489,24 @@ class CoursesApi {
       "application/_*+json"
     ];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'PUT',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'PUT', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'Course') as Course;
+      return apiClient.deserialize(response.body, 'Course') as Course;
     } else {
       return null;
     }
@@ -642,8 +514,8 @@ class CoursesApi {
 
   ///
   ///
-  /// 
-  Future<CourseToken> coursesUpdateToken(int tokenId, { bool state }) async {
+  ///
+  Future<CourseToken> coursesUpdateToken(int tokenId, {bool state}) async {
     Object postBody = null;
 
     // verify required params are set
@@ -652,50 +524,39 @@ class CoursesApi {
     }
 
     // create path and map variables
-    String path = "/api/Courses/updateToken/{tokenId}".replaceAll(
-        "{format}", "json").replaceAll(
-        "{" + "tokenId" + "}", tokenId.toString());
+    String path = "/api/Courses/updateToken/{tokenId}"
+        .replaceAll("{format}", "json")
+        .replaceAll("{" + "tokenId" + "}", tokenId.toString());
 
     // query params
     List<QueryParam> queryParams = [];
     Map<String, String> headerParams = {};
     Map<String, String> formParams = {};
     if (state != null) {
-      queryParams.addAll(
-          _convertParametersForCollectionFormat("", "state", state));
+      queryParams
+          .addAll(_convertParametersForCollectionFormat("", "state", state));
     }
 
     List<String> contentTypes = [];
 
-    String contentType = contentTypes.length > 0
-        ? contentTypes[0]
-        : "application/json";
+    String contentType =
+        contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
 
     if (contentType.startsWith("multipart/form-data")) {
       bool hasFields = false;
       MultipartRequest mp = new MultipartRequest(null, null);
 
-      if (hasFields)
-        postBody = mp;
-    }
-    else {}
+      if (hasFields) postBody = mp;
+    } else {}
 
-    var response = await apiClient.invokeAPI(
-        path,
-        'PUT',
-        queryParams,
-        postBody,
-        headerParams,
-        formParams,
-        contentType,
-        authNames);
+    var response = await apiClient.invokeAPI(path, 'PUT', queryParams, postBody,
+        headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
       throw new ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
-      return
-        apiClient.deserialize(response.body, 'CourseToken') as CourseToken;
+      return apiClient.deserialize(response.body, 'CourseToken') as CourseToken;
     } else {
       return null;
     }
