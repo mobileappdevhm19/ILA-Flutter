@@ -37,7 +37,7 @@ class _AddCourseViewState extends State<AddCourseView> {
                           child: new Padding(
                             padding: const EdgeInsets.only(left: 40.0),
                             child: new Text(
-                              "Course Name",
+                              "Course Id",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Config.PrimaryColor,
@@ -69,9 +69,12 @@ class _AddCourseViewState extends State<AddCourseView> {
                         children: <Widget>[
                           new Expanded(
                             child: TextField(
+                              maxLength: 10,
                               keyboardType: TextInputType.number,
                               controller: firstController,
-                              inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                              inputFormatters: [
+                                WhitelistingTextInputFormatter.digitsOnly,
+                              ],
                               onChanged: (value) => _id = int.parse(value),
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
