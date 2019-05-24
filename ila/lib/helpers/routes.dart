@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ila/views/addCourseView.dart';
 import 'package:ila/views/courseView.dart';
 import 'package:ila/views/homeView.dart';
+import 'package:ila/views/lectureView.dart';
 import 'package:ila/views/loginView.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila/views/settingsView.dart';
@@ -33,6 +34,9 @@ Widget _buildRoute({
     case '/course':
       Course course = arguments as Course;
       return CourseView(course: course,);
+    case '/lecture':
+      Lecture lecture = arguments as Lecture;
+      return LectureView(lecture: lecture,);
     case '/addCourse':
       return AddCourseView();
     default:
