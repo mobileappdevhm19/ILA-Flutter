@@ -91,10 +91,10 @@ packages:
   ila_swagger:
     dependency: "direct main"
     description:
-      path: "..\\ila_swagger"
+      path: "../ila_swagger"
       relative: true
     source: path
-    version: "1.0.1"
+    version: "1.0.5"
   jaguar_jwt:
     dependency: transitive
     description:

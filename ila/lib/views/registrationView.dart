@@ -125,7 +125,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Firstname',
+                                    hintText: 'Lastname',
                                     hintStyle: TextStyle(color: Colors.grey),
                                   ),
                                 ),
