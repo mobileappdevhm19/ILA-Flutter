@@ -21,7 +21,7 @@ packages:
       name: barcode_scan
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "0.0.8"
   boolean_selector:
     dependency: transitive
     description:
@@ -98,7 +98,7 @@ packages:
   ila_swagger:
     dependency: "direct main"
     description:
-      path: "../ila_swagger"
+      path: "..\\ila_swagger"
       relative: true
     source: path
     version: "1.0.5"

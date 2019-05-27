@@ -67,9 +67,9 @@ class _LectureViewState extends State<LectureView> {
                                 ))
                           ],
                           //TODO: Change Background Color into panic mode and out
-                          //TODO: pass new setState function to reset into initial State
-                          //TODO: make new fucntion above to pass it to button instance
+                          //TODO: make new function above to pass it to button instance
                           //TODO: Reset Button
+                          //TODO: pass new setState function to reset into initial State
                           func: () {
                             LecturesApi().lecturesPostPause(widget.lecture.id);
                             print('pausePressedMahDude');
