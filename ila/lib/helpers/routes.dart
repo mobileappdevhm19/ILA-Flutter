@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/views/addCourseView.dart';
 import 'package:ila/views/courseView.dart';
+import 'package:ila/views/forgotPassword.dart';
 import 'package:ila/views/homeView.dart';
 import 'package:ila/views/lectureView.dart';
 import 'package:ila/views/loginView.dart';
@@ -29,6 +30,8 @@ Widget _buildRoute({
       return LoginView();
     case '/registration':
       return RegistrationView();
+    case '/forgotPassword':
+      return ForgotPassword();
     case '/settings':
       return SettingsView();
     case '/course':

@@ -243,6 +243,33 @@ class _LoginViewState extends State<LoginView> {
                             ],
                           ),
                         ),
+                        new Container(
+                          margin: EdgeInsets.only(
+                            top: 20.0
+                          ),
+                          alignment: Alignment.center,
+                          child: new Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: <Widget>[
+                              new FlatButton(
+
+                                child: Text(
+                                  "Forgot Password",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.normal
+                                  ),
+                                ),
+                                onPressed: ()=>
+                                Navigator.pushNamed(context,
+                                '/forgotPassword'),
+                              ),
+
+                            ],
+                          )
+                        )
                       ],
                     ))));
   }
