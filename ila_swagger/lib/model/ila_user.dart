@@ -67,11 +67,14 @@ class ILAUser {
 
   List<Answer> answers = [];
   
+
+  List<PushTokens> pushTokens = [];
+  
   ILAUser();
 
   @override
   String toString() {
-    return 'ILAUser[id=$id, userName=$userName, normalizedUserName=$normalizedUserName, email=$email, normalizedEmail=$normalizedEmail, emailConfirmed=$emailConfirmed, passwordHash=$passwordHash, securityStamp=$securityStamp, concurrencyStamp=$concurrencyStamp, phoneNumber=$phoneNumber, phoneNumberConfirmed=$phoneNumberConfirmed, twoFactorEnabled=$twoFactorEnabled, lockoutEnd=$lockoutEnd, lockoutEnabled=$lockoutEnabled, accessFailedCount=$accessFailedCount, firstName=$firstName, lastName=$lastName, myCourses=$myCourses, memberCourses=$memberCourses, pauses=$pauses, questions=$questions, answers=$answers, ]';
+    return 'ILAUser[id=$id, userName=$userName, normalizedUserName=$normalizedUserName, email=$email, normalizedEmail=$normalizedEmail, emailConfirmed=$emailConfirmed, passwordHash=$passwordHash, securityStamp=$securityStamp, concurrencyStamp=$concurrencyStamp, phoneNumber=$phoneNumber, phoneNumberConfirmed=$phoneNumberConfirmed, twoFactorEnabled=$twoFactorEnabled, lockoutEnd=$lockoutEnd, lockoutEnabled=$lockoutEnabled, accessFailedCount=$accessFailedCount, firstName=$firstName, lastName=$lastName, myCourses=$myCourses, memberCourses=$memberCourses, pauses=$pauses, questions=$questions, answers=$answers, pushTokens=$pushTokens, ]';
   }
 
   ILAUser.fromJson(Map<String, dynamic> json) {
@@ -140,6 +143,9 @@ class ILAUser {
     answers =
       Answer.listFromJson(json['answers'])
 ;
+    pushTokens =
+      PushTokens.listFromJson(json['pushTokens'])
+;
   }
 
   Map<String, dynamic> toJson() {
@@ -165,7 +171,8 @@ class ILAUser {
       'memberCourses': memberCourses,
       'pauses': pauses,
       'questions': questions,
-      'answers': answers
+      'answers': answers,
+      'pushTokens': pushTokens
      };
   }
 
