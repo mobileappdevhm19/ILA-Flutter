@@ -1,4 +1,4 @@
-package com.example.ila;
+package com.vonkirschbaum.ila;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
