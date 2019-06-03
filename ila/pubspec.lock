@@ -21,7 +21,7 @@ packages:
       name: barcode_scan
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.8"
+    version: "1.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -64,6 +64,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
+  device_info:
+    dependency: "direct main"
+    description:
+      name: device_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0+1"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0+1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.1+1"
+  firebase_remote_config:
+    dependency: "direct main"
+    description:
+      name: firebase_remote_config
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0+1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -144,6 +172,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
+  platform:
+    dependency: transitive
+    description:
+      name: platform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   quiver:
     dependency: transitive
     description:
@@ -221,3 +256,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.1.0 <3.0.0"
+  flutter: ">=0.1.4 <2.0.0"
