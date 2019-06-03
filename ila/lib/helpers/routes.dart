@@ -7,6 +7,7 @@ import 'package:ila/views/loginView.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila/views/settingsView.dart';
 import 'package:ila_swagger/api.dart';
+import 'package:ila/views/dataPolicy.dart';
 
 Widget makeRoute(
     {@required BuildContext context,
@@ -29,6 +30,8 @@ Widget _buildRoute({
       return LoginView();
     case '/registration':
       return RegistrationView();
+    case '/settings/dataPolicy':
+      return DataPolicyView();
     case '/settings':
       return SettingsView();
     case '/course':

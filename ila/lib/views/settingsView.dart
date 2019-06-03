@@ -23,7 +23,7 @@ class _SettingsViewState extends State<SettingsView> {
             ListTile(
               leading: Icon(
                 Icons.account_circle,
-                size: 70.0,
+                size: 50.0,
               ),
               title: Text(account['username']),
               trailing: IconButton(
@@ -33,7 +33,17 @@ class _SettingsViewState extends State<SettingsView> {
                     Navigator.popUntil(context, (route) => route.isFirst);
                     Navigator.pushReplacementNamed(context, '/login');
                   }),
-            )
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.book,
+                size: 50.0,
+              ),
+              title: Text('Data Policy'),
+              onTap: () =>
+                  Navigator.of(context).pushNamed('/settings/dataPolicy'),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
           ],
         ),
       ),
