@@ -27,7 +27,7 @@ class _LectureViewState extends State<LectureView> {
   }
 
   _load() {
-    LecturesApi().lecturesGetQuestion(widget.lecture.id).then((questions) {
+    LecturesApi().lecturesGetQuestions(widget.lecture.id).then((questions) {
       _profQues = questions;
       setState(() {
         _isData = true;
