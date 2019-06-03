@@ -29,6 +29,10 @@ dependencies:
   jaguar_jwt: any
   ila_swagger:
     path: ../ila_swagger/
+  firebase_messaging: any
+  firebase_remote_config: any
+  firebase_core: any
+  device_info: any
 
 dev_dependencies:
   flutter_driver:
