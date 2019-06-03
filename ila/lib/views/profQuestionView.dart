@@ -20,7 +20,7 @@ class _ProfQuestionViewState extends State<ProfQuestionView> {
   void initState() {
     super.initState();
 
-    LecturesApi().lecturesGetQuestion(widget.lecture.id).then((questions) {
+    LecturesApi().lecturesGetQuestions(widget.lecture.id).then((questions) {
       _questions = questions;
       setState(() {
         _isData = true;

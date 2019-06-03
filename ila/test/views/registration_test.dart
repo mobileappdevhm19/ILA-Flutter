@@ -1,12 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
+import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/registrationView.dart';
 
 import '../testHelper.dart';
 
 void main() {
   testWidgets('Registration', (WidgetTester tester) async {
-    await tester.pumpWidget(TestHelper.buildPage(RegistrationView(), AuthModel()));
+    await tester.pumpWidget(TestHelper.buildPage(RegistrationView(), AuthModel(IlaApiClient())));
 
     final firstnameFinder = find.text("Firstname");
     final lastnameFinder = find.text("Lastname");

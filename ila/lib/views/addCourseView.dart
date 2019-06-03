@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ila/config.dart';
+import 'package:ila/helpers/userException.dart';
 import 'package:ila/main.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -35,9 +36,7 @@ class _AddCourseViewState extends State<AddCourseView> {
   }
 
   _registerButtonOnPressed(BuildContext context) async {
-    CoursesApi()
-        .coursesJoinCourse(_id, token: _tokenController.text)
-        .then((_) async {
+    CoursesApi().coursesJoin(_id, token: _tokenController.text).then((_) async {
       Navigator.pop(context);
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Course Added'),

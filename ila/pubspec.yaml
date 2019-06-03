@@ -26,6 +26,7 @@ dependencies:
   scoped_model: any
   flutter_secure_storage: any
   barcode_scan: any
+  jaguar_jwt: any
   ila_swagger:
     path: ../ila_swagger/
 
