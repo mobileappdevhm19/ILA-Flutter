@@ -26,9 +26,8 @@ class _LectureViewState extends State<LectureView> {
     _load();
   }
 
-   _load(){
-
-    LecturesApi().lecturesGetQuestions(widget.lecture.id).then((questions) {
+  _load() {
+    LecturesApi().lecturesGetQuestion(widget.lecture.id).then((questions) {
       _profQues = questions;
       setState(() {
         _isData = true;
@@ -66,23 +65,28 @@ class _LectureViewState extends State<LectureView> {
                                   color: Colors.white,
                                 ))
                           ],
-                          //TODO: Change Background Color into panic mode and out
-                          //TODO: make new function above to pass it to button instance
-                          //TODO: Reset Button
-                          //TODO: pass new setState function to reset into initial State
-                          func: () {
-                            LecturesApi().lecturesPostPause(widget.lecture.id);
-                            print('pausePressedMahDude');
+                          func: () async {
+                            await LecturesApi()
+                                .lecturesPostPause(widget.lecture.id)
+                                .catchError((error) {
+                              if (error is ApiException &&
+                                  error.code == 481) {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text('you have to wait 2 min'),
+                                  duration: Duration(seconds: 4),
+                                ));
+                              }
+                              else{
+                                throw error;
+                              }
+                            });
                           }),
-
                       SizedBox(height: 16),
                       Divider(
                         height: 8,
                         color: Colors.black,
                       ),
-
                       Text('Questions Section'),
-
                       Divider(
                         height: 8,
                         color: Colors.black,
@@ -124,7 +128,6 @@ class _LectureViewState extends State<LectureView> {
                           ],
                         ),
                       ),
-
                       Card(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -136,30 +139,33 @@ class _LectureViewState extends State<LectureView> {
                                   'The following Questions have  been asked:'),
                             ),
                             SizedBox(
-                            width: 200.0,
-                            height: 80.0,
-                            child: ListView.builder(
-                                itemCount: _profQues?.length ?? 0,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return FlatButton(
-                                      child: Text('Question $index'),
-                                      onPressed: () {showDialog(context: context,
-                                      child:Card(
-                                      child: Column(
-                                          mainAxisSize:
-                                          MainAxisSize.min,
-                                          children: <Widget>[
-                                          Text(_profQues[index].pointedQuestion,
-                                          style: Theme.of(context)
-                                          .textTheme
-                                          .display1),]))
-
-                                      );}
-                                  );
-                                }),
+                              width: 200.0,
+                              height: 80.0,
+                              child: ListView.builder(
+                                  itemCount: _profQues?.length ?? 0,
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return FlatButton(
+                                        child: Text('Question $index'),
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              child: Card(
+                                                  child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                    Text(
+                                                        _profQues[index]
+                                                            .pointedQuestion,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .display1),
+                                                  ])));
+                                        });
+                                  }),
                             ),
-
                             ButtonTheme.bar(
                               // make buttons use the appropriate styles for cards
                               child: ButtonBar(
@@ -209,19 +215,26 @@ class _LectureViewState extends State<LectureView> {
                                                         'Post question'),
                                                     //Example for Posting to API via inline generated JSON
                                                     onPressed: () {
-                                                      LecturesApi().lecturesPostQuestion(widget.lecture.id,
-                                                          QuestionCreate.fromJson({"pointedQuestion": _controller.text}));
-                                                      Navigator.of(context).pop();
+                                                      LecturesApi()
+                                                          .lecturesPostQuestion(
+                                                              widget.lecture.id,
+                                                              QuestionCreate
+                                                                  .fromJson({
+                                                                "pointedQuestion":
+                                                                    _controller
+                                                                        .text
+                                                              }));
+                                                      Navigator.of(context)
+                                                          .pop();
                                                       this.initState();
                                                     },
                                                   ),
                                                 ]))
-                                              ])))
-                                      .then((_){
+                                              ]))).then((_) {
                                         setState(() {
                                           _isData = false;
                                         });
-                                       _load();
+                                        _load();
                                       });
                                     },
                                   ),
