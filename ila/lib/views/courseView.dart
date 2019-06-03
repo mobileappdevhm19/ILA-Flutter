@@ -20,7 +20,7 @@ class _CourseViewState extends State<CourseView> {
   void initState() {
     super.initState();
 
-    LecturesApi().lecturesGetMemberLectures(widget.course.id).then((lectures) {
+    LecturesApi().lecturesGetAll(widget.course.id).then((lectures) {
       _lectures = lectures;
       setState(() {
         _isData = true;

@@ -8,6 +8,9 @@ class Question {
   String pointedQuestion = null;
   
 
+  int lectureId = null;
+  
+
   Lecture lecture = null;
   
 
@@ -20,7 +23,7 @@ class Question {
 
   @override
   String toString() {
-    return 'Question[id=$id, pointedQuestion=$pointedQuestion, lecture=$lecture, user=$user, answers=$answers, ]';
+    return 'Question[id=$id, pointedQuestion=$pointedQuestion, lectureId=$lectureId, lecture=$lecture, user=$user, answers=$answers, ]';
   }
 
   Question.fromJson(Map<String, dynamic> json) {
@@ -30,6 +33,9 @@ class Question {
     ;
     pointedQuestion =
         json['pointedQuestion']
+    ;
+    lectureId =
+        json['lectureId']
     ;
     lecture =
       
@@ -50,6 +56,7 @@ class Question {
     return {
       'id': id,
       'pointedQuestion': pointedQuestion,
+      'lectureId': lectureId,
       'lecture': lecture,
       'user': user,
       'answers': answers

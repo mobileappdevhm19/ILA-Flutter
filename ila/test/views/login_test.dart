@@ -1,12 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
+import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/loginView.dart';
 
 import '../testHelper.dart';
 
 void main() {
   testWidgets('Login', (WidgetTester tester) async {
-    await tester.pumpWidget(TestHelper.buildPage(LoginView(), AuthModel()));
+    await tester.pumpWidget(TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
 
     final usernameFinder = find.text("USERNAME");
     final passwordFinder = find.text("PASSWORD");

@@ -19,7 +19,7 @@ class _HomeViewState extends State<HomeView> {
 
   void loadState() {
 
-    CoursesApi().coursesGetMemberCourses().then((courses) {
+    CoursesApi().coursesGetAll().then((courses) {
       _courses = courses;
       setState(() {
         _isData = true;

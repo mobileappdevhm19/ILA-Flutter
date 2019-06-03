@@ -14,13 +14,16 @@ class Answer {
   ILAUser user = null;
   
 
+  int questionId = null;
+  
+
   Question question = null;
   
   Answer();
 
   @override
   String toString() {
-    return 'Answer[id=$id, comment=$comment, votes=$votes, user=$user, question=$question, ]';
+    return 'Answer[id=$id, comment=$comment, votes=$votes, user=$user, questionId=$questionId, question=$question, ]';
   }
 
   Answer.fromJson(Map<String, dynamic> json) {
@@ -39,6 +42,9 @@ class Answer {
       
       new ILAUser.fromJson(json['user'])
 ;
+    questionId =
+        json['questionId']
+    ;
     question =
       
       
@@ -52,6 +58,7 @@ class Answer {
       'comment': comment,
       'votes': votes,
       'user': user,
+      'questionId': questionId,
       'question': question
      };
   }
