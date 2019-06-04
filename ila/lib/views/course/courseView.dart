@@ -81,7 +81,7 @@ class _CourseViewState extends State<CourseView> {
                           itemCount: _news.length > 2 ? 2 : _news.length,
                           itemBuilder: (context, index) {
                             CourseNews newsItem = _news[index];
-                            newsItem.body = newsItem.body.substring(
+                            var subtitle = newsItem.body.substring(
                                     0,
                                     newsItem.body.length > 30
                                         ? 30
@@ -90,10 +90,10 @@ class _CourseViewState extends State<CourseView> {
 
                             return ListTile(
                               title: Text(newsItem.title),
-                              subtitle: Text(newsItem.body),
+                              subtitle: Text(subtitle),
                               trailing: Icon(Icons.keyboard_arrow_right),
                               onTap: () => Navigator.of(context).pushNamed(
-                                    '/news',
+                                    '/newsDetails',
                                     arguments: newsItem,
                                   ),
                             );
@@ -105,6 +105,26 @@ class _CourseViewState extends State<CourseView> {
                                 height: 1,
                               )))
                       : Center(child: CircularProgressIndicator()),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 15.0, bottom: 10),
+                          child: GestureDetector(
+                            child: Text("Show all news",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue)),
+                            onTap: () => Navigator.of(context).pushNamed(
+                                  '/news',
+                                  arguments: _news,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
