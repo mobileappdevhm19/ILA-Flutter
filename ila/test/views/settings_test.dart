@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
-import 'package:ila/views/settingsView.dart';
+import 'package:ila/views/settings/settingsView.dart';
 
 import '../testHelper.dart';
 
