@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           return MaterialPageRoute(
             builder: (BuildContext context) => makeRoute(
-                  context: context,
-                  routeName: settings.name,
-                  arguments: settings.arguments,
-                ),
+              context: context,
+              routeName: settings.name,
+              arguments: settings.arguments,
+            ),
             maintainState: true,
             fullscreenDialog: false,
           );
