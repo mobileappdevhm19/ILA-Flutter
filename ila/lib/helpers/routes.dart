@@ -27,7 +27,7 @@ Widget _buildRoute({
 }) {
   switch (routeName) {
     case '/home':
-      return HomeView();
+      return HomeView(CoursesApi());
     case '/login':
       return LoginView();
     case '/registration':
