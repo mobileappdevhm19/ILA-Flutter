@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:ila/helpers/userException.dart';
-import 'package:ila/models/AuthModel.dart';
 import 'package:ila_swagger/api.dart';
-import 'package:scoped_model/scoped_model.dart';
-
 import '../config.dart';
 import '../main.dart';
 
 class RegistrationView extends StatefulWidget {
+  final AccountApi accountApi;
+
+  RegistrationView({@required this.accountApi}) {}
   @override
   _RegistrationViewState createState() => _RegistrationViewState();
 }
 
 class _RegistrationViewState extends State<RegistrationView> {
-  String _firstName;
-  String _lastName;
-  String _email;
-  String _password;
-  String _password2;
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _password2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +62,14 @@ class _RegistrationViewState extends State<RegistrationView> {
                             ),
                           ),
                           padding:
-                          const EdgeInsets.only(left: 0.0, right: 10.0),
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
-                                  onChanged: (value) => _firstName = value,
+                                  controller: _firstName,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -115,14 +115,14 @@ class _RegistrationViewState extends State<RegistrationView> {
                             ),
                           ),
                           padding:
-                          const EdgeInsets.only(left: 0.0, right: 10.0),
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
-                                  onChanged: (value) => _lastName = value,
+                                  controller: _lastName,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -168,14 +168,14 @@ class _RegistrationViewState extends State<RegistrationView> {
                             ),
                           ),
                           padding:
-                          const EdgeInsets.only(left: 0.0, right: 10.0),
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
-                                  onChanged: (value) => _email = value,
+                                  controller: _email,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -229,7 +229,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                               new Expanded(
                                 child: TextField(
                                   obscureText: true,
-                                  onChanged: (value) => _password = value,
+                                  controller: _password,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -283,7 +283,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                               new Expanded(
                                 child: TextField(
                                   obscureText: true,
-                                  onChanged: (value) => _password2 = value,
+                                  controller: _password2,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -345,7 +345,7 @@ class _RegistrationViewState extends State<RegistrationView> {
   }
 
   _registerButtonOnPressed(BuildContext context) async {
-    if (_password2 != _password) {
+    if (_password2.text != _password.text) {
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text('Passwords do not match.'),
         duration: Duration(seconds: 4),
@@ -353,12 +353,12 @@ class _RegistrationViewState extends State<RegistrationView> {
       return;
     }
 
-    AccountApi()
+    widget.accountApi
         .accountSignUp(SignUp.fromJson({
-      'username': _email,
-      'password': _password,
-      'firstName': _firstName,
-      'lastName': _lastName,
+      'username': _email.text,
+      'password': _password.text,
+      'firstName': _firstName.text,
+      'lastName': _lastName.text,
     }))
         .then((_) async {
       await Navigator.pop(context);
@@ -367,7 +367,6 @@ class _RegistrationViewState extends State<RegistrationView> {
         duration: Duration(seconds: 4),
       ));
     }).catchError((e) {
-      print(e.toString());
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text(e is UserException
             ? (e as UserException).message

@@ -1,12 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
+import 'package:ila/views/homeView.dart';
 import 'package:ila/views/loginView.dart';
-
+import 'package:mockito/mockito.dart';
 import '../testHelper.dart';
 
 void main() {
+  MockNavigatorObserver mockNavigator = MockNavigatorObserver();
+
   testWidgets('Login', (WidgetTester tester) async {
     await tester.pumpWidget(
         TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
@@ -34,7 +38,9 @@ void main() {
 
   testWidgets('Login failed UserException', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        LoginView(), AuthModel(_IlaApiClientLogin(UserException(message: 'USEREXCEPTION'), false))));
+        LoginView(),
+        AuthModel(_IlaApiClientLogin(
+            UserException(message: 'USEREXCEPTION'), false))));
 
     await tester.tap(find.text("LOGIN"));
 

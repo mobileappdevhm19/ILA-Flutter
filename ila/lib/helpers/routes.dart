@@ -31,7 +31,7 @@ Widget _buildRoute({
     case '/login':
       return LoginView();
     case '/registration':
-      return RegistrationView();
+      return RegistrationView(accountApi: AccountApi());
     case '/settings/dataPolicy':
       return DataPolicyView();
     case '/settings':
