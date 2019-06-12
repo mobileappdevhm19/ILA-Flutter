@@ -9,7 +9,7 @@ import 'package:ila/views/loginView.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila/views/settings/settingsView.dart';
 import 'package:ila_swagger/api.dart';
-import 'package:ila/views/settings/dataPolicy.dart';
+import 'package:ila/views/settings/dataPolicyView.dart';
 
 Widget makeRoute(
     {@required BuildContext context,
