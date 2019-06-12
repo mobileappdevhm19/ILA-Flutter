@@ -44,10 +44,10 @@ Widget _buildRoute({
       return LectureView(lecture: lecture);
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
-      return NewsDetailsView(news: news);
+      return NewsDetailsView(news);
     case '/news':
       List<CourseNews> news = arguments as List<CourseNews>;
-      return NewsView(news: news);
+      return NewsView(news);
     case '/addCourse':
       return AddCourseView(CoursesApi());
     default:

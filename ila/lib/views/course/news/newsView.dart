@@ -6,7 +6,7 @@ import 'package:ila_swagger/api.dart';
 class NewsView extends StatefulWidget {
   List<CourseNews> news;
 
-  NewsView({this.news});
+  NewsView(this.news);
 
   @override
   _NewsViewState createState() => _NewsViewState();
@@ -15,8 +15,6 @@ class NewsView extends StatefulWidget {
 class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
-    final authmodel = ScopedModel.of<AuthModel>(context);
-    var account = authmodel.getAccountInfo();
     return Scaffold(
         appBar: AppBar(
           title: Text('News'),

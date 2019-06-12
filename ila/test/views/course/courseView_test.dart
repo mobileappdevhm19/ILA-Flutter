@@ -63,7 +63,7 @@ class _CourseApiMock extends CoursesApi {
           },
           {
             'title': 'Title1',
-            'body': 'Should not be displayed',
+            'body': 'Short Body2',
           }
         ]
       }));

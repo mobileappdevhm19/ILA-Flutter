@@ -3,7 +3,7 @@ import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/settings/settingsView.dart';
 
-import '../testHelper.dart';
+import '../../testHelper.dart';
 
 const _testUsername = "TESTUSERNAME";
 void main() {

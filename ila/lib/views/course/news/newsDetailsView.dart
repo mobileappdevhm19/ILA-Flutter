@@ -6,7 +6,7 @@ import 'package:ila_swagger/api.dart';
 class NewsDetailsView extends StatefulWidget {
   CourseNews news;
 
-  NewsDetailsView({this.news});
+  NewsDetailsView(this.news);
 
   @override
   _NewsDetailsViewState createState() => _NewsDetailsViewState();
