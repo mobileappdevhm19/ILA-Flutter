@@ -41,7 +41,7 @@ Widget _buildRoute({
       return CourseView(course, CoursesApi(), LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(lecture: lecture);
+      return LectureView(LecturesApi(), lecture);
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
       return NewsDetailsView(news);
