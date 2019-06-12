@@ -49,7 +49,7 @@ Widget _buildRoute({
       List<CourseNews> news = arguments as List<CourseNews>;
       return NewsView(news: news);
     case '/addCourse':
-      return AddCourseView();
+      return AddCourseView(CoursesApi());
     default:
       throw 'Route $routeName is not defined';
   }
