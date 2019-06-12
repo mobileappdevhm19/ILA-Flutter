@@ -11,9 +11,11 @@ void main() {
     await tester.pumpWidget(TestHelper.buildPage(SettingsView(), _TestAuthModel()));
 
     final settingsFinder = find.text("Settings");
+    final dataPolicyFinder = find.text("Data Policy");
     final usernameFinder = find.text(_testUsername);
 
     expect(settingsFinder, findsOneWidget);
+    expect(dataPolicyFinder, findsOneWidget);
     expect(usernameFinder, findsOneWidget);
   });
 }
