@@ -9,7 +9,7 @@ import 'package:ila/views/loginView.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila/views/settings/settingsView.dart';
 import 'package:ila_swagger/api.dart';
-import 'package:ila/views/settings/dataPolicy.dart';
+import 'package:ila/views/settings/dataPolicyView.dart';
 
 Widget makeRoute(
     {@required BuildContext context,
@@ -27,29 +27,29 @@ Widget _buildRoute({
 }) {
   switch (routeName) {
     case '/home':
-      return HomeView();
+      return HomeView(CoursesApi());
     case '/login':
       return LoginView();
     case '/registration':
-      return RegistrationView();
+      return RegistrationView(accountApi: AccountApi());
     case '/settings/dataPolicy':
       return DataPolicyView();
     case '/settings':
       return SettingsView();
     case '/course':
       Course course = arguments as Course;
-      return CourseView(course: course);
+      return CourseView(course, CoursesApi(), LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
       return LectureView(lecture: lecture);
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
-      return NewsDetailsView(news: news);
+      return NewsDetailsView(news);
     case '/news':
       List<CourseNews> news = arguments as List<CourseNews>;
-      return NewsView(news: news);
+      return NewsView(news);
     case '/addCourse':
-      return AddCourseView();
+      return AddCourseView(CoursesApi());
     default:
       throw 'Route $routeName is not defined';
   }

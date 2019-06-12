@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ila/config.dart';
-import 'package:ila_swagger/api.dart';
 
 class DataPolicyView extends StatefulWidget {
   @override

@@ -4,8 +4,10 @@ import 'package:ila_swagger/api.dart';
 
 class CourseView extends StatefulWidget {
   Course course;
+  CoursesApi coursesApi;
+  LecturesApi lecturesApi;
 
-  CourseView({this.course});
+  CourseView(this.course, this.coursesApi, this.lecturesApi);
 
   @override
   _CourseViewState createState() => _CourseViewState();
@@ -21,7 +23,7 @@ class _CourseViewState extends State<CourseView> {
   void initState() {
     super.initState();
 
-    CoursesApi().coursesGet(widget.course.id).then((course) {
+    widget.coursesApi.coursesGet(widget.course.id).then((course) {
       _news = course.news;
       setState(() {
         _isDataNews = true;
@@ -30,7 +32,7 @@ class _CourseViewState extends State<CourseView> {
       print(error.toString());
       // TODO handle error
     });
-    LecturesApi().lecturesGetAll(widget.course.id).then((lectures) {
+    widget.lecturesApi.lecturesGetAll(widget.course.id).then((lectures) {
       _lectures = lectures;
       setState(() {
         _isDataLectures = true;

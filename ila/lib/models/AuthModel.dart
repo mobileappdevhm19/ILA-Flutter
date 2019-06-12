@@ -5,14 +5,16 @@ import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AuthModel extends Model {
-  FlutterSecureStorage storage = FlutterSecureStorage();
+  FlutterSecureStorage storage;
 
   AuthStatus getStatus() => getApiClient().getStatus();
 
   IlaApiClient getApiClient() => (defaultApiClient as IlaApiClient);
 
-  AuthModel(IlaApiClient apiClient) {
+  AuthModel(IlaApiClient apiClient, {this.storage}) {
     defaultApiClient = apiClient;
+    if(storage == null)
+      storage = FlutterSecureStorage();
   }
 
   Future init() async {
@@ -34,11 +36,11 @@ class AuthModel extends Model {
 
   Future login(String username, String password) async {
     try {
-      await (defaultApiClient as IlaApiClient).login(username, password);
+      await getApiClient().login(username, password);
       await storage.write(
-          key: 'username', value: (defaultApiClient as IlaApiClient).username);
+          key: 'username', value: getApiClient().username);
       await storage.write(
-          key: 'password', value: (defaultApiClient as IlaApiClient).password);
+          key: 'password', value: getApiClient().password);
     } catch (error) {
       try {
         storage.delete(key: 'username');
