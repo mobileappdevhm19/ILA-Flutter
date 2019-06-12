@@ -14,14 +14,14 @@ void main() {
 
     await tester.pump();
 
-    final copyrightFinder = find.text("Courses");
+    final subtitleFinder = find.text("Courses");
     final titleFinder = find.text("ILA");
     final settingsFinder = find.byIcon(Icons.settings);
     final addFinder = find.byIcon(Icons.add);
     final title1Finder = find.text("Title1");
     final title2Finder = find.text("Title2");
 
-    expect(copyrightFinder, findsOneWidget);
+    expect(subtitleFinder, findsOneWidget);
     expect(titleFinder, findsOneWidget);
     expect(settingsFinder, findsOneWidget);
     expect(addFinder, findsOneWidget);
