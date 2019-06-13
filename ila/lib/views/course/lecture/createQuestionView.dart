@@ -21,9 +21,10 @@ class _CreateQuestionViewState extends State<CreateQuestionView> {
       body: Column(
         children: <Widget>[
           ListView(
+            shrinkWrap: true,
             children: <Widget>[
               TextField(
-                  //maxLines: 20,
+                  maxLines: 20,
                   autofocus: true,
                   controller: _controller,
                   textInputAction: TextInputAction.send,
