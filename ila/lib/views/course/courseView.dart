@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/helpers/userException.dart';
+import 'package:ila/main.dart';
 import 'package:ila_swagger/api.dart';
 
 class CourseView extends StatefulWidget {
@@ -18,6 +20,7 @@ class _CourseViewState extends State<CourseView> {
   bool _isDataNews = false;
   List<Lecture> _lectures;
   List<CourseNews> _news;
+
 
   @override
   void initState() {
@@ -42,6 +45,7 @@ class _CourseViewState extends State<CourseView> {
       // TODO handle error
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +177,47 @@ class _CourseViewState extends State<CourseView> {
               ),
             ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.remove),
+          onPressed: () => showDialog(
+              context: context,
+              child: AlertDialog(
+                title: new Text("Leave Course",
+                    textAlign: TextAlign.center),
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      new FlatButton(
+                        onPressed: () => _registerButtonOnPressed(context),
+                        child: new Text("Confirm")
+                      ),
+                      new FlatButton(
+                        onPressed: (){Navigator.pop(context);},
+                        child: new Text("Cancel")
+                      ),
+                    ]
+                 )
+              )
+          ),
+      )
     );
+  }
+
+  _registerButtonOnPressed(BuildContext context) async {
+    widget.coursesApi.coursesLeave(widget.course.id).then((_) async {
+      Navigator.pushNamed(context, '/home');
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('Course Removed'),
+        duration: Duration(seconds: 4),
+      ));
+    }).catchError((e) {
+      print(e.toString());
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(e is UserException
+            ? (e as UserException).message
+            : 'Unbekannter Fehler ist aufgetretten'),
+        duration: Duration(seconds: 4),
+      ));
+    });
   }
 }
