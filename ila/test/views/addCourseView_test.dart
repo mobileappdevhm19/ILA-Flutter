@@ -2,7 +2,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
-import 'package:ila/views/course/AddCourseView.dart';
+import 'package:ila/views/course/addCourseView.dart';
 import 'package:ila_swagger/api.dart';
 
 import '../testHelper.dart';
