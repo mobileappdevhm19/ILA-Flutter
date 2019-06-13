@@ -139,7 +139,7 @@ class IlaApiClient extends ApiClient {
     }
   }
 
-  logout() async {
+  Future logout() async {
     try {
       await AccountApi().accountLogout();
       username = null;
