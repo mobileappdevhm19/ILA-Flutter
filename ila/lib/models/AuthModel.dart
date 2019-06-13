@@ -59,7 +59,7 @@ class AuthModel extends Model {
     try {
       await storage.delete(key: 'username');
       await storage.delete(key: 'password');
-      getApiClient().logout();
+      await getApiClient().logout();
     } catch (e) {
       // TODO error handling
     }
