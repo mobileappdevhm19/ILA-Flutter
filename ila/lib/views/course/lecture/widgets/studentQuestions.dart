@@ -94,7 +94,7 @@ class _StudentQuestionsState extends State<StudentQuestions> {
                 ),
                 Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       RaisedButton(
@@ -110,6 +110,17 @@ class _StudentQuestionsState extends State<StudentQuestions> {
                           });
                         },
                         child: Text('Ask a question'),
+                        color: Colors.primaries[0],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/lecture/questions/all',
+                              arguments: widget.lecture.questions);
+                        },
+                        child: Text('Show All Questions'),
                         color: Colors.primaries[0],
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
