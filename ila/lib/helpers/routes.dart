@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/views/course/addCourseView.dart';
 import 'package:ila/views/course/courseView.dart';
+import 'package:ila/views/course/lecture/AllQuestionsView.dart';
 import 'package:ila/views/course/lecture/createQuestionAnswerView.dart';
 import 'package:ila/views/course/lecture/createQuestionView.dart';
 import 'package:ila/views/course/lecture/questionView.dart';
@@ -54,6 +55,12 @@ Widget _buildRoute({
     case '/lecture/question/new':
       Lecture lecture = arguments as Lecture;
       return CreateQuestionView(LecturesApi(), lecture);
+    case '/quesDetails':
+      Question ques = arguments as Question;
+      return QuestionView(ques);
+    case '/lecture/questions/all':
+      List<Question> questions = arguments as List<Question>;
+      return AllQuestionsView(questions);
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
       return NewsDetailsView(news);
