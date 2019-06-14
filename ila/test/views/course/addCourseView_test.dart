@@ -11,7 +11,7 @@ void main() {
     coursesApi = _CourseApiMock();
 
     await tester.pumpWidget(TestHelper.buildPage(
-        AddCourseView(), AuthModel(IlaApiClient())));
+        AddCourseView(), AuthModel(), IlaApiClient()));
 
     final titleFinder = find.text("ILA");
     final qrCodeFinder = find.text("Scan QR Code");

@@ -12,8 +12,8 @@ void main() {
   testWidgets('addCourseView', (WidgetTester tester) async {
     coursesApi = _CourseApiMock();
 
-    await tester.pumpWidget(TestHelper.buildPage(
-        AddCourseView(), AuthModel(IlaApiClient())));
+    await tester.pumpWidget(
+        TestHelper.buildPage(AddCourseView(), AuthModel(), IlaApiClient()));
 
     await tester.pump();
 
@@ -31,7 +31,6 @@ void main() {
     expect(hintFinder, findsOneWidget);
     expect(hintFinder1, findsNWidgets(2));
 
-
     await tester.tap(buttonFinder);
 
     expect(hintFinder1, findsNWidgets(2));
@@ -45,15 +44,16 @@ void main() {
 }
 
 class _CourseApiMock extends CoursesApi {
-  Future<List<Course>> coursesJoin(int i,{String token}) async {
+  Future<List<Course>> coursesJoin(int i, {String token}) async {
     return Future.value([
       Course.fromJson({'title': 'Title1'}),
     ]);
   }
 }
+
 //TODO how can we shadow the library import if no instance cen be used in original import?
-class _BarcodeScannerMock extends BarcodeScanner{
-  Future<String> scan(){
+class _BarcodeScannerMock extends BarcodeScanner {
+  Future<String> scan() {
     return Future.value('mockID*mockPassword');
   }
 }

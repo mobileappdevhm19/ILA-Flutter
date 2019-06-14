@@ -14,8 +14,8 @@ void main() {
     testWidgets('Texts', (WidgetTester tester) async {
       coursesApi = _CourseApiMock();
 
-      await tester.pumpWidget(TestHelper.buildPage(
-          HomeView(), AuthModel(IlaApiClient())));
+      await tester.pumpWidget(
+          TestHelper.buildPage(HomeView(), AuthModel(), IlaApiClient()));
 
       await tester.pump();
 

@@ -12,8 +12,8 @@ const _testUsername = "TESTUSERNAME";
 void main() {
   group('Settings', () {
     testWidgets('Texts', (WidgetTester tester) async {
-      await tester
-          .pumpWidget(TestHelper.buildPage(SettingsView(), _TestAuthModel()));
+      await tester.pumpWidget(TestHelper.buildPage(
+          SettingsView(), _TestAuthModel(), IlaApiClient()));
 
       final settingsFinder = find.text('Settings');
       final dataPolicyFinder = find.text('Data Policy');
@@ -27,7 +27,7 @@ void main() {
     testWidgets('Navigation Data Policy', (WidgetTester tester) async {
       MockNavigatorObserver navigation = MockNavigatorObserver();
       await tester.pumpWidget(TestHelper.buildPage(
-          SettingsView(), _TestAuthModel(),
+          SettingsView(), _TestAuthModel(), IlaApiClient(),
           navigatorObserver: navigation));
 
       await tester.tap(find.text('Data Policy'));
@@ -39,7 +39,7 @@ void main() {
     testWidgets('Logout', (WidgetTester tester) async {
       MockNavigatorObserver navigation = MockNavigatorObserver();
       await tester.pumpWidget(TestHelper.buildPage(
-          SettingsView(), _TestAuthModel(),
+          SettingsView(), _TestAuthModel(), IlaApiClient(),
           navigatorObserver: navigation));
 
       await tester.tap(find.byIcon(Icons.exit_to_app));
@@ -51,8 +51,6 @@ void main() {
 }
 
 class _TestAuthModel extends AuthModel {
-  _TestAuthModel() : super(IlaApiClient());
-
   @override
   getAccountInfo() {
     return {

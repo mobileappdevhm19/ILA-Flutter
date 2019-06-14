@@ -9,21 +9,23 @@ import '../../../testHelper.dart';
 void main() {
   testWidgets('News Details', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        NewsView([
-          CourseNews.fromJson({
-            'title': 'Title1',
-            'body': 'Short Body',
-          }),
-          CourseNews.fromJson({
-            'title': 'Title2',
-            'body': 'Very very very very very very long body.',
-          }),
-          CourseNews.fromJson({
-            'title': 'Title3',
-            'body': 'Short Body2',
-          })
-        ]),
-        AuthModel(IlaApiClient())));
+      NewsView([
+        CourseNews.fromJson({
+          'title': 'Title1',
+          'body': 'Short Body',
+        }),
+        CourseNews.fromJson({
+          'title': 'Title2',
+          'body': 'Very very very very very very long body.',
+        }),
+        CourseNews.fromJson({
+          'title': 'Title3',
+          'body': 'Short Body2',
+        })
+      ]),
+      AuthModel(),
+      IlaApiClient(),
+    ));
 
     final titleFinder = find.text('News');
 
@@ -41,6 +43,5 @@ void main() {
     expect(news1SubtitleFinder, findsOneWidget);
     expect(news2SubtitleFinder, findsOneWidget);
     expect(news3SubtitleFinder, findsOneWidget);
-
   });
 }

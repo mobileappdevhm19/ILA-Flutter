@@ -23,7 +23,8 @@ void main() {
             },
           ]
         })),
-        AuthModel(IlaApiClient())));
+        AuthModel(),
+        IlaApiClient()));
 
     final titleFinder = find.text('Student Question');
     final questionFinder = find.text('QUESTION');
@@ -35,7 +36,6 @@ void main() {
     expect(answer1Finder, findsOneWidget);
     expect(answer2Finder, findsOneWidget);
   });
-
 
   testWidgets('QuestionView Navigation', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
@@ -50,7 +50,9 @@ void main() {
             },
           ]
         })),
-        AuthModel(IlaApiClient()),navigatorObserver: navigation));
+        AuthModel(),
+        IlaApiClient(),
+        navigatorObserver: navigation));
 
     await tester.pump();
 
