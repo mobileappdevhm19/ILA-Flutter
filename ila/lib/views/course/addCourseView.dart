@@ -8,10 +8,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:ila/helpers/errorPopupDialog.dart';
 
 class AddCourseView extends StatefulWidget {
-  CoursesApi coursesApi;
-
-  AddCourseView(this.coursesApi);
-
   @override
   _AddCourseViewState createState() => _AddCourseViewState();
 }
@@ -37,7 +33,7 @@ class _AddCourseViewState extends State<AddCourseView> {
   }
 
   _registerButtonOnPressed(BuildContext context) async {
-    widget.coursesApi.coursesJoin(_id, token: _tokenController.text).then((_) async {
+    coursesApi.coursesJoin(_id, token: _tokenController.text).then((_) async {
       Navigator.pop(context);
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Course Added'),

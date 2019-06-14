@@ -4,11 +4,14 @@ import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/course/addCourseView.dart';
 import 'package:ila_swagger/api.dart';
 import '../../testHelper.dart';
+import 'package:ila/main.dart';
 
 void main() {
   testWidgets('Join Course', (WidgetTester tester) async {
+    coursesApi = _CourseApiMock();
+
     await tester.pumpWidget(TestHelper.buildPage(
-        AddCourseView(_CourseApiMock()), AuthModel(IlaApiClient())));
+        AddCourseView(), AuthModel(IlaApiClient())));
 
     final titleFinder = find.text("ILA");
     final qrCodeFinder = find.text("Scan QR Code");

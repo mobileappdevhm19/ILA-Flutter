@@ -5,10 +5,6 @@ import '../config.dart';
 import '../main.dart';
 
 class RegistrationView extends StatefulWidget {
-  final AccountApi accountApi;
-
-  RegistrationView({@required this.accountApi}) {}
-
   @override
   _RegistrationViewState createState() => _RegistrationViewState();
 }
@@ -345,7 +341,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                     ))));
   }
 
-  _registerButtonOnPressed(BuildContext context) async {
+  _registerButtonOnPressed(BuildContext context) {
     if (_password2.text != _password.text) {
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text('Passwords do not match.'),
@@ -353,27 +349,39 @@ class _RegistrationViewState extends State<RegistrationView> {
       ));
       return;
     }
+    print('0');
 
-    widget.accountApi
+    accountApi
         .accountSignUp(SignUp.fromJson({
       'username': _email.text,
       'password': _password.text,
       'firstName': _firstName.text,
       'lastName': _lastName.text,
     }))
-        .then((_) async {
+        .then((_) {
+          print('1');
       Navigator.of(context).pop();
       scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Please check your mails.'),
+        content: Text('Account created, please login.'),
         duration: Duration(seconds: 4),
       ));
     }).catchError((e) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(e is UserException
-            ? (e as UserException).message
-            : 'Unbekannter Fehler ist aufgetretten'),
-        duration: Duration(seconds: 4),
-      ));
+      if (!(e is FormatException)) {
+        print('2.1');
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(e is ApiException
+              ? e.message
+              : 'Unbekannter Fehler ist aufgetretten'),
+          duration: Duration(seconds: 4),
+        ));
+      } else {
+        print('2.2');
+        Navigator.of(context).pop();
+        scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('Account created, please login.'),
+          duration: Duration(seconds: 4),
+        ));
+      }
     });
   }
 }

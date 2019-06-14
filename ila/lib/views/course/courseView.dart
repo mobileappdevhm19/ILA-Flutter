@@ -6,10 +6,8 @@ import 'package:ila_swagger/api.dart';
 
 class CourseView extends StatefulWidget {
   Course course;
-  CoursesApi coursesApi;
-  LecturesApi lecturesApi;
 
-  CourseView(this.course, this.coursesApi, this.lecturesApi);
+  CourseView(this.course);
 
   @override
   _CourseViewState createState() => _CourseViewState();
@@ -24,7 +22,7 @@ class _CourseViewState extends State<CourseView> {
   void initState() {
     super.initState();
 
-    widget.coursesApi.coursesGet(widget.course.id).then((course) {
+    coursesApi.coursesGet(widget.course.id).then((course) {
       this.widget.course = course;
       setState(() {
         _isDataCourse = true;
@@ -33,7 +31,7 @@ class _CourseViewState extends State<CourseView> {
       print(error.toString());
       // TODO handle error
     });
-    widget.lecturesApi.lecturesGetAll(widget.course.id).then((lectures) {
+    lecturesApi.lecturesGetAll(widget.course.id).then((lectures) {
       _lectures = lectures;
       setState(() {
         _isDataLectures = true;
@@ -52,7 +50,7 @@ class _CourseViewState extends State<CourseView> {
         ),
         body: Builder(
           builder: (context) => Container(
-                padding: EdgeInsets.only(top: 15),
+                padding: EdgeInsets.only(top: 15, left: 10.0, right: 10.0),
                 child: Column(
                   children: <Widget>[
                     Row(
@@ -87,43 +85,7 @@ class _CourseViewState extends State<CourseView> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                      child: Divider(
-                        height: 10.0,
-                      ),
-                    ),
-                    _isDataCourse
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: widget.course.news.length > 2
-                                ? 2
-                                : widget.course.news.length,
-                            itemBuilder: (context, index) {
-                              CourseNews newsItem = widget.course.news[index];
-                              var subtitle = newsItem.body.substring(
-                                      0,
-                                      newsItem.body.length > 30
-                                          ? 30
-                                          : newsItem.body.length) +
-                                  "...";
-
-                              return Card(
-                                child: Container(
-                                  child: ListTile(
-                                    title: Text(newsItem.title),
-                                    subtitle: Text(subtitle),
-                                    trailing: Icon(Icons.keyboard_arrow_right),
-                                    onTap: () =>
-                                        Navigator.of(context).pushNamed(
-                                          '/newsDetails',
-                                          arguments: newsItem,
-                                        ),
-                                  ),
-                                ),
-                              );
-                            })
-                        : Center(child: CircularProgressIndicator()),
+                    _buildNews(context),
                     Row(
                       children: <Widget>[
                         Expanded(
@@ -161,27 +123,7 @@ class _CourseViewState extends State<CourseView> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                      child: Divider(
-                        height: 10.0,
-                      ),
-                    ),
-                    _isDataLectures
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _lectures.length,
-                            itemBuilder: (context, index) => Card(
-                                    child: Container(
-                                        child: ListTile(
-                                  title: Text(_lectures[index].title),
-                                  trailing: Icon(Icons.keyboard_arrow_right),
-                                  onTap: () => Navigator.of(context).pushNamed(
-                                      '/lecture',
-                                      arguments: _lectures[index]),
-                                ))),
-                          )
-                        : Center(child: CircularProgressIndicator())
+                    _buildLectures(context),
                   ],
                 ),
               ),
@@ -207,8 +149,67 @@ class _CourseViewState extends State<CourseView> {
         ));
   }
 
+  _buildNews(BuildContext context) {
+    return _isDataCourse
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount:
+                widget.course.news.length > 2 ? 2 : widget.course.news.length,
+            itemBuilder: (context, index) {
+              CourseNews newsItem = widget.course.news[index];
+              var subtitle = newsItem.body.substring(0,
+                      newsItem.body.length > 30 ? 30 : newsItem.body.length) +
+                  "...";
+
+              return Padding(
+                padding: EdgeInsets.only(bottom: 9.0, top: 1.0),
+                child: Material(
+                  elevation: Config.ShadowHeigth,
+                  borderRadius: BorderRadius.circular(4.0),
+                  shadowColor: Config.ShadowColor,
+                  child: InkWell(
+                    // Do onTap() if it isn't null, otherwise do print()
+                    onTap: () => Navigator.of(context).pushNamed(
+                          '/newsDetails',
+                          arguments: newsItem,
+                        ),
+                    child: ListTile(
+                      title: Text(newsItem.title),
+                      subtitle: Text(subtitle),
+                      trailing: Icon(Icons.keyboard_arrow_right),
+                    ),
+                  ),
+                ),
+              );
+            })
+        : Center(child: CircularProgressIndicator());
+  }
+
+  _buildLectures(BuildContext context) {
+    return _isDataLectures
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount: _lectures.length,
+            itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(bottom: 9.0, top: 1.0),
+                child: Material(
+                    elevation: Config.ShadowHeigth,
+                    borderRadius: BorderRadius.circular(4.0),
+                    shadowColor: Config.ShadowColor,
+                    child: InkWell(
+                        // Do onTap() if it isn't null, otherwise do print()
+                        onTap: () => Navigator.of(context)
+                            .pushNamed('/lecture', arguments: _lectures[index]),
+                        child: ListTile(
+                          title: Text(_lectures[index].title),
+                          trailing: Icon(Icons.keyboard_arrow_right),
+                        )))),
+          )
+        : Center(child: CircularProgressIndicator());
+  }
+
   _leaveButtonOnPressed(BuildContext context) async {
-    widget.coursesApi.coursesLeave(widget.course.id).then((_) async {
+    coursesApi.coursesLeave(widget.course.id).then((_) async {
       Navigator.pushNamed(context, '/home');
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Course Removed'),

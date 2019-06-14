@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ila/main.dart';
 import 'package:ila_swagger/api.dart';
 
 class CreateQuestionView extends StatefulWidget {
   final Lecture lecture;
-  final LecturesApi lecturesApi;
 
-  const CreateQuestionView(this.lecturesApi, this.lecture);
+  const CreateQuestionView(this.lecture);
 
   @override
   _CreateQuestionViewState createState() => _CreateQuestionViewState();
@@ -40,7 +40,7 @@ class _CreateQuestionViewState extends State<CreateQuestionView> {
                   FlatButton(
                     child: const Text('Post question'),
                     //Example for Posting to API via inline generated JSON
-                    onPressed: () => widget.lecturesApi
+                    onPressed: () => lecturesApi
                             .lecturesPostQuestion(
                                 widget.lecture.id,
                                 QuestionCreate.fromJson(

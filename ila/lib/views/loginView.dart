@@ -44,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "USERNAME",
+                                  "E-Mail",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -80,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Benutzername',
+                                    hintText: 'E-Mail',
                                     hintStyle: TextStyle(color: Colors.grey),
                                   ),
                                 ),
@@ -97,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "PASSWORD",
+                                  "Password",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -172,7 +172,7 @@ class _LoginViewState extends State<LoginView> {
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
-                                            "LOGIN",
+                                            "Login",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -214,7 +214,7 @@ class _LoginViewState extends State<LoginView> {
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
-                                            "REGISTRATION",
+                                            "Registration",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,

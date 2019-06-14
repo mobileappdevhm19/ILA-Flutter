@@ -31,30 +31,30 @@ Widget _buildRoute({
 }) {
   switch (routeName) {
     case '/home':
-      return HomeView(CoursesApi());
+      return HomeView();
     case '/login':
       return LoginView();
     case '/registration':
-      return RegistrationView(accountApi: AccountApi());
+      return RegistrationView();
     case '/settings/dataPolicy':
       return DataPolicyView();
     case '/settings':
       return SettingsView();
     case '/course':
       Course course = arguments as Course;
-      return CourseView(course, CoursesApi(), LecturesApi());
+      return CourseView(course);
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(LecturesApi(), lecture);
+      return LectureView(lecture);
     case '/lecture/question':
       Question question = arguments as Question;
       return QuestionView(question);
     case '/lecture/question/answers/new':
       Question question = arguments as Question;
-      return CreateQuestionAnswerView(LecturesApi(), question);
+      return CreateQuestionAnswerView(question);
     case '/lecture/question/new':
       Lecture lecture = arguments as Lecture;
-      return CreateQuestionView(LecturesApi(), lecture);
+      return CreateQuestionView(lecture);
     case '/quesDetails':
       Question ques = arguments as Question;
       return QuestionView(ques);
@@ -68,7 +68,7 @@ Widget _buildRoute({
       List<CourseNews> news = arguments as List<CourseNews>;
       return NewsView(news);
     case '/addCourse':
-      return AddCourseView(CoursesApi());
+      return AddCourseView();
     default:
       throw 'Route $routeName is not defined';
   }
