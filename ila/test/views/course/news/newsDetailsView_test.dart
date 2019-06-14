@@ -9,11 +9,13 @@ import '../../../testHelper.dart';
 void main() {
   testWidgets('News Details', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        NewsDetailsView(CourseNews.fromJson({
-          'title': 'Title1',
-          'body': 'This is a text.',
-        })),
-        AuthModel(IlaApiClient())));
+      NewsDetailsView(CourseNews.fromJson({
+        'title': 'Title1',
+        'body': 'This is a text.',
+      })),
+      AuthModel(),
+      IlaApiClient(),
+    ));
 
     final titleFinder = find.text('Title1');
     final bodyFinder = find.text('This is a text.');

@@ -11,7 +11,7 @@ void main() {
   group('Login', () {
     testWidgets('Texts', (WidgetTester tester) async {
       await tester.pumpWidget(
-          TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
+          TestHelper.buildPage(LoginView(), AuthModel(), IlaApiClient()));
 
       final usernameFinder = find.text("E-Mail");
       final passwordFinder = find.text("Password");
@@ -26,7 +26,7 @@ void main() {
 
     testWidgets('Login failed unexpectedError', (WidgetTester tester) async {
       await tester.pumpWidget(TestHelper.buildPage(
-          LoginView(), AuthModel(_IlaApiClientLogin(null, false))));
+          LoginView(), AuthModel(), _IlaApiClientLogin(null, false)));
 
       await tester.tap(find.text("Login"));
 
@@ -37,8 +37,8 @@ void main() {
     testWidgets('Login failed UserException', (WidgetTester tester) async {
       await tester.pumpWidget(TestHelper.buildPage(
           LoginView(),
-          AuthModel(_IlaApiClientLogin(
-              UserException(message: 'USEREXCEPTION'), false))));
+          AuthModel(),_IlaApiClientLogin(
+              UserException(message: 'USEREXCEPTION'), false)));
 
       await tester.tap(find.text("Login"));
 
@@ -49,7 +49,7 @@ void main() {
     testWidgets('Navigation - Registration', (WidgetTester tester) async {
       MockNavigatorObserver navigation = MockNavigatorObserver();
       await tester.pumpWidget(TestHelper.buildPage(
-          LoginView(), AuthModel(IlaApiClient()),
+          LoginView(), AuthModel(),IlaApiClient(),
           navigatorObserver: navigation));
 
       await tester.tap(find.text('Registration'));

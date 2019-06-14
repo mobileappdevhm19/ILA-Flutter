@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
+import 'package:ila/main.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
+import 'package:ila/views/loginView.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila_swagger/api.dart';
 import '../testHelper.dart';
@@ -10,7 +12,7 @@ import '../testHelper.dart';
 void main() {
   testWidgets('Registration', (WidgetTester tester) async {
     await tester.pumpWidget(
-        TestHelper.buildPage(RegistrationView(), AuthModel(IlaApiClient())));
+        TestHelper.buildPage(RegistrationView(), AuthModel(), IlaApiClient()));
 
     final firstnameFinder = find.text("Firstname");
     final lastnameFinder = find.text("Lastname");
@@ -29,7 +31,7 @@ void main() {
 
   testWidgets('Registration passwords not equal', (WidgetTester tester) async {
     await tester.pumpWidget(
-        TestHelper.buildPage(RegistrationView(), AuthModel(IlaApiClient())));
+        TestHelper.buildPage(RegistrationView(), AuthModel(), IlaApiClient()));
 
     await tester.enterText(find.byType(TextField).at(3), 'ABC');
     await tester.enterText(find.byType(TextField).at(4), 'DEF');
@@ -44,7 +46,7 @@ void main() {
     accountApi = _AccountApiMock(ApiException(400, 'USEREXCEPTION'), false);
 
     await tester.pumpWidget(
-        TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
+        TestHelper.buildPage(LoginView(), AuthModel(), IlaApiClient()));
 
     await tester.pump();
     await tester.tap(find.text('Registration'));
@@ -66,7 +68,7 @@ void main() {
     accountApi = _AccountApiMock(null, false);
 
     await tester.pumpWidget(
-        TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
+        TestHelper.buildPage(LoginView(), AuthModel(), IlaApiClient()));
 
     await tester.pump();
     await tester.tap(find.text('Registration'));
@@ -88,7 +90,7 @@ void main() {
     accountApi = _AccountApiMock(null, true);
 
     await tester.pumpWidget(TestHelper.buildPage(
-        LoginView(), AuthModel(IlaApiClient()),
+        LoginView(), AuthModel(), IlaApiClient(),
         navigatorObserver: navigaton));
 
     await tester.pump();

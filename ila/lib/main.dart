@@ -14,22 +14,26 @@ CoursesApi coursesApi;
 UserApi userApi;
 AccountApi accountApi;
 
-void main() => runApp(MyApp(apiClient: IlaApiClient()));
+
+void main() => runApp(MyApp(IlaApiClient()));
 
 class MyApp extends StatelessWidget {
   IlaApiClient apiClient;
 
-  MyApp({this.apiClient}) {
+  MyApp(this.apiClient) {
+    defaultApiClient = apiClient;
+
     lecturesApi = LecturesApi();
     coursesApi = CoursesApi();
     userApi = UserApi();
     accountApi = AccountApi();
+
   }
 
   @override
   Widget build(BuildContext context) {
     return ScopedModel<AuthModel>(
-      model: AuthModel(apiClient),
+      model: AuthModel(),
       child: MaterialApp(
         title: Config.AppTitle,
         theme: ThemeData(

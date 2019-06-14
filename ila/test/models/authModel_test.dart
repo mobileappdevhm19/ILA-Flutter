@@ -2,64 +2,60 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
+import 'package:ila_swagger/api.dart';
 import 'package:meta/meta.dart';
 
 main() {
   group('AuthModel', () {
     group('init', () {
       test('success', () async {
-        IlaApiClient client = _IlaApiClientMock(true);
+        defaultApiClient = _IlaApiClientMock(true);
 
-        AuthModel model =
-            AuthModel(client, storage: _FlutterSecureStorageMock(true));
+        AuthModel model = AuthModel(storage: _FlutterSecureStorageMock(true));
 
         await model.init();
 
-        expect(client.username, 'username');
-        expect(client.password, 'password');
+        expect((defaultApiClient as _IlaApiClientMock).username, 'username');
+        expect((defaultApiClient as _IlaApiClientMock).password, 'password');
       });
 
       test('storage error', () async {
-        IlaApiClient client = _IlaApiClientMock(true);
+        defaultApiClient = _IlaApiClientMock(true);
 
-        AuthModel model =
-            AuthModel(client, storage: _FlutterSecureStorageMock(false));
+        AuthModel model = AuthModel(storage: _FlutterSecureStorageMock(false));
 
         await model.init();
 
-        expect(client.username, null);
-        expect(client.password, null);
+        expect((defaultApiClient as _IlaApiClientMock).username, null);
+        expect((defaultApiClient as _IlaApiClientMock).password, null);
       });
 
       test('login error', () async {
-        AuthModel model = AuthModel(_IlaApiClientMock(false,error: 'error'),
-            storage: _FlutterSecureStorageMock(true));
+        defaultApiClient = _IlaApiClientMock(false, error: 'error');
+        AuthModel model = AuthModel(storage: _FlutterSecureStorageMock(true));
 
         model.init().catchError((error) => expect(error, 'error'));
       });
     });
 
     test('getStatus', () {
-      _IlaApiClientMock client =
-          _IlaApiClientMock(true, status: AuthStatus.None);
-      AuthModel model =
-          AuthModel(client, storage: _FlutterSecureStorageMock(true));
+      defaultApiClient = _IlaApiClientMock(true, status: AuthStatus.None);
+      AuthModel model = AuthModel(storage: _FlutterSecureStorageMock(true));
 
       expect(model.getStatus(), AuthStatus.None);
     });
 
     group('login', () {
       test('successful', () async {
-        _IlaApiClientMock client = _IlaApiClientMock(true);
-        AuthModel model =
-            AuthModel(client, storage: _FlutterSecureStorageMock(true));
+        defaultApiClient = _IlaApiClientMock(true);
+        AuthModel model = AuthModel(storage: _FlutterSecureStorageMock(true));
 
         await model.login('username', 'password');
       });
 
       test('failed storage', () async {
-        _IlaApiClientMock client = _IlaApiClientMock(true);
-        AuthModel model = AuthModel(client,
+        defaultApiClient = _IlaApiClientMock(true);
+        AuthModel model = AuthModel(
             storage: _FlutterSecureStorageMock(false, error: 'error'));
 
         try {
@@ -70,9 +66,9 @@ main() {
     });
     group('logout', () {
       test('successful', () async {
-        _IlaApiClientMock client = _IlaApiClientMock(true);
+        defaultApiClient = _IlaApiClientMock(true);
         AuthModel model =
-            AuthModel(client, storage: _FlutterSecureStorageMock(true));
+            AuthModel(storage: _FlutterSecureStorageMock(true));
 
         await model.logout();
       });

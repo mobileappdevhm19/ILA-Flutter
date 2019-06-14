@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(TestHelper.buildPage(
         CourseView(Course.fromJson(
             {'title': 'CourseTitle1', 'description': 'abc', 'id': 0})),
-        AuthModel(IlaApiClient())));
+        AuthModel(),IlaApiClient()));
 
     await tester.pump();
 

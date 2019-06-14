@@ -11,8 +11,7 @@ class AuthModel extends Model {
 
   IlaApiClient getApiClient() => (defaultApiClient as IlaApiClient);
 
-  AuthModel(IlaApiClient apiClient, {this.storage}) {
-    defaultApiClient = apiClient;
+  AuthModel({this.storage}) {
     if(storage == null)
       storage = FlutterSecureStorage();
   }

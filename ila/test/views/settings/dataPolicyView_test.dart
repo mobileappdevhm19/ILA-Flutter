@@ -7,7 +7,7 @@ import '../../testHelper.dart';
 
 void main() {
   testWidgets('Data Policy', (WidgetTester tester) async {
-    await tester.pumpWidget(TestHelper.buildPage(DataPolicyView(), AuthModel(IlaApiClient())));
+    await tester.pumpWidget(TestHelper.buildPage(DataPolicyView(), AuthModel(),IlaApiClient()));
 
     final titleFinder = find.text("Data Policy");
 
