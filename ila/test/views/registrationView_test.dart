@@ -46,7 +46,8 @@ void main() {
   testWidgets('Registration error UserException', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
         RegistrationView(
-            accountApi: _AccountApiMock(UserException(message: 'USEREXCEPTION'), false)),
+            accountApi: _AccountApiMock(
+                UserException(message: 'USEREXCEPTION'), false)),
         AuthModel(IlaApiClient())));
 
     await tester.enterText(find.byType(TextField).at(0), 'FirstName');
@@ -63,8 +64,7 @@ void main() {
 
   testWidgets('Registration error AnyException', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        RegistrationView(
-            accountApi: _AccountApiMock(null, false)),
+        RegistrationView(accountApi: _AccountApiMock(null, false)),
         AuthModel(IlaApiClient())));
 
     await tester.enterText(find.byType(TextField).at(0), 'FirstName');
@@ -78,6 +78,22 @@ void main() {
 
     expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
   });
+  testWidgets('Registration successful', (WidgetTester tester) async {
+    MockNavigatorObserver navigaton = MockNavigatorObserver();
+    await tester.pumpWidget(TestHelper.buildPage(
+        RegistrationView(accountApi: _AccountApiMock(null, true)),
+        AuthModel(IlaApiClient()),
+        navigatorObserver: navigaton));
+
+    await tester.enterText(find.byType(TextField).at(0), 'FirstName');
+    await tester.enterText(find.byType(TextField).at(1), 'LastName');
+    await tester.enterText(find.byType(TextField).at(2), 'test@email.com');
+    await tester.enterText(find.byType(TextField).at(3), 'Password');
+    await tester.enterText(find.byType(TextField).at(4), 'Password');
+
+    await tester.tap(find.text('REGISTER'));
+    await tester.pumpAndSettle();
+  });
 }
 
 class _AccountApiMock extends AccountApi {
@@ -90,6 +106,7 @@ class _AccountApiMock extends AccountApi {
     if (registerSuccess) {
       return Future.value(null);
     } else {
-      return Future.error(registerException);}
+      return Future.error(registerException);
+    }
   }
 }

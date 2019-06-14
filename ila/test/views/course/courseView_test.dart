@@ -11,8 +11,11 @@ import '../../testHelper.dart';
 void main() {
   testWidgets('CourseView', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        CourseView(Course.fromJson({'title': 'CourseTitle1', 'id': 0}),
-            _CourseApiMock(), _LecturesApiMock()),
+        CourseView(
+            Course.fromJson(
+                {'title': 'CourseTitle1', 'description': 'abc', 'id': 0}),
+            _CourseApiMock(),
+            _LecturesApiMock()),
         AuthModel(IlaApiClient())));
 
     await tester.pump();
@@ -44,14 +47,22 @@ void main() {
 class _CourseApiMock extends CoursesApi {
   Future<List<Course>> coursesGetAll() async {
     return Future.value([
-      Course.fromJson({'title': 'Title1'}),
-      Course.fromJson({'title': 'Title2'}),
+      Course.fromJson({
+        'title': 'Title1',
+        'description': 'abc1',
+      }),
+      Course.fromJson({
+        'title': 'Title2',
+        'description': 'abc2',
+      }),
     ]);
   }
 
   Future<Course> coursesGet(int id) async {
     if (id == 0)
       return Future.value(Course.fromJson({
+        'description': 'abc',
+        'title': 'CourseTitle1',
         'news': [
           {
             'title': 'Title1',
