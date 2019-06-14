@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "898078467383",
+    "firebase_url": "https://interactive-lecture-assi-6c3e2.firebaseio.com",
+    "project_id": "interactive-lecture-assi-6c3e2",
+    "storage_bucket": "interactive-lecture-assi-6c3e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898078467383:android:07cf8838511ee97b",
+        "android_client_info": {
+          "package_name": "com.vonkirschbaum.ila"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898078467383-a2it3qj3udqq83vklfn9rn9kn7a8svs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8L5_5Eb2DqW_IVuQhXCHICnzGJPeIHvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898078467383-a2it3qj3udqq83vklfn9rn9kn7a8svs1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "898078467383-t7d7co19aalkjb3v9ud88k1hodvf47li.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vonkirschbaum.ila"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -27,6 +27,7 @@ class _HomeViewState extends State<HomeView> {
         _isData = true;
       });
     }).catchError((error) {
+      print(error);
       // TODO handle error
     });
   }

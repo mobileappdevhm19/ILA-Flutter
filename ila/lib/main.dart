@@ -6,6 +6,8 @@ import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/splashScreen.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -19,6 +21,9 @@ void main() => runApp(MyApp(IlaApiClient()));
 
 class MyApp extends StatelessWidget {
   IlaApiClient apiClient;
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   MyApp(this.apiClient) {
     defaultApiClient = apiClient;
@@ -35,6 +40,7 @@ class MyApp extends StatelessWidget {
     return ScopedModel<AuthModel>(
       model: AuthModel(),
       child: MaterialApp(
+        navigatorObservers: <NavigatorObserver>[observer],
         title: Config.AppTitle,
         theme: ThemeData(
           primarySwatch: Config.PrimaryColor,
