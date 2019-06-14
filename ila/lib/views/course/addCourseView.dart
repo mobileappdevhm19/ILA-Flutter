@@ -5,6 +5,7 @@ import 'package:ila/helpers/userException.dart';
 import 'package:ila/main.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:ila/helpers/errorPopupDialog.dart';
 
 class AddCourseView extends StatefulWidget {
   CoursesApi coursesApi;
@@ -62,21 +63,24 @@ class _AddCourseViewState extends State<AddCourseView> {
       _idController.text = values[0];
       _tokenController.text = values[1];
       //});
+
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
-        //TODO: handle error
         print('The user did not grant the camera permission!');
+        ErrorPopupDialogue.showErrorDialog(context,  "Camera Access Denied!",
+             'Please grant the camera permission!');
       } else {
-        //TODO: handle error
         print('Uknown error: $e');
+        ErrorPopupDialogue.showErrorDialog(context,  ErrorPopupDialogue.unknownT,
+            ErrorPopupDialogue.unknownB);
       }
     } on FormatException {
-      //TODO: handle error
       print(
           'null (User returned using the "back"-button before scanning anything. Result)s');
     } catch (e) {
-      //TODO: handle error
       print('Uknown error: $e');
+      ErrorPopupDialogue.showErrorDialog(context,  ErrorPopupDialogue.unknownT,
+          ErrorPopupDialogue.unknownB);
     }
   }
 
