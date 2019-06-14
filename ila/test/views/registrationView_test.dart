@@ -20,7 +20,7 @@ void main() {
     final emailFinder = find.text("E-Mail");
     final passwordFinder = find.text("Password");
     final passwordRepeateFinder = find.text("Repeate Password");
-    final registerFinder = find.text("REGISTER");
+    final registerFinder = find.text("Register");
 
     expect(firstnameFinder, findsNWidgets(2));
     expect(lastnameFinder, findsNWidgets(2));
@@ -37,7 +37,7 @@ void main() {
     await tester.enterText(find.byType(TextField).at(3), 'ABC');
     await tester.enterText(find.byType(TextField).at(4), 'DEF');
 
-    await tester.tap(find.text("REGISTER"));
+    await tester.tap(find.text("Register"));
     await tester.pump();
 
     expect(find.text('Passwords do not match.'), findsOneWidget);
@@ -56,7 +56,7 @@ void main() {
     await tester.enterText(find.byType(TextField).at(3), 'Password');
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
-    await tester.tap(find.text('REGISTER'));
+    await tester.tap(find.text('Register'));
     await tester.pump();
 
     expect(find.text('USEREXCEPTION'), findsOneWidget);
@@ -73,7 +73,7 @@ void main() {
     await tester.enterText(find.byType(TextField).at(3), 'Password');
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
-    await tester.tap(find.text('REGISTER'));
+    await tester.tap(find.text('Register'));
     await tester.pump();
 
     expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
@@ -91,7 +91,7 @@ void main() {
     await tester.enterText(find.byType(TextField).at(3), 'Password');
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
-    await tester.tap(find.text('REGISTER'));
+    await tester.tap(find.text('Register'));
     await tester.pumpAndSettle();
   });
 }
