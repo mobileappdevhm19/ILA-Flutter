@@ -29,9 +29,11 @@ class _SettingsViewState extends State<SettingsView> {
               trailing: IconButton(
                   icon: Icon(Icons.exit_to_app),
                   onPressed: () async {
+                    print('1');
                     await authmodel.logout();
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                    Navigator.pushReplacementNamed(context, '/login');
+                    print('2');
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    Navigator.of(context).pushReplacementNamed('/login');
                   }),
             ),
             ListTile(

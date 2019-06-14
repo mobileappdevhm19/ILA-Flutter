@@ -8,6 +8,7 @@ class RegistrationView extends StatefulWidget {
   final AccountApi accountApi;
 
   RegistrationView({@required this.accountApi}) {}
+
   @override
   _RegistrationViewState createState() => _RegistrationViewState();
 }
@@ -361,7 +362,7 @@ class _RegistrationViewState extends State<RegistrationView> {
       'lastName': _lastName.text,
     }))
         .then((_) async {
-      await Navigator.pop(context);
+      Navigator.of(context).pop();
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Please check your mails.'),
         duration: Duration(seconds: 4),

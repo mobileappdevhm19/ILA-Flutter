@@ -201,8 +201,8 @@ class _LoginViewState extends State<LoginView> {
                                         new BorderRadius.circular(30.0),
                                   ),
                                   color: Config.AppColorDark,
-                                  onPressed: () => Navigator.pushNamed(
-                                      context, '/registration'),
+                                  onPressed: () => Navigator.of(context)
+                                      .pushNamed('/registration'),
                                   child: new Container(
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 20.0,
