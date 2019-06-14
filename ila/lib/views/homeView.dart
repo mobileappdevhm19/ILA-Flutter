@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/main.dart';
 import 'package:ila_swagger/api.dart';
 
 class HomeView extends StatefulWidget {
-  final CoursesApi coursesApi;
-
-  HomeView(this.coursesApi) {}
+  HomeView() {}
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -22,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void loadState() {
-    widget.coursesApi.coursesGetAll().then((courses) {
+    coursesApi.coursesGetAll().then((courses) {
       _courses = courses;
       setState(() {
         _isData = true;

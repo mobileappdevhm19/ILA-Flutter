@@ -29,6 +29,8 @@ class Config {
   };
   static const PrimaryColor = MaterialColor(0xffe6191d, _PrimaryColors);
   static const AppColorDark = MaterialColor(0xff984AE3, _AppColorsDark);
+  static const ShadowColor = Color(0x802196F3);
+  static const ShadowHeigth = 4.0;
 
   static const SplashScreenDuration = 10;
 }

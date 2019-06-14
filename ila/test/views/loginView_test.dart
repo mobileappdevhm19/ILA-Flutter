@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
-import 'package:ila/views/homeView.dart';
 import 'package:ila/views/loginView.dart';
 import 'package:mockito/mockito.dart';
 import '../testHelper.dart';
@@ -15,12 +13,12 @@ void main() {
       await tester.pumpWidget(
           TestHelper.buildPage(LoginView(), AuthModel(IlaApiClient())));
 
-      final usernameFinder = find.text("USERNAME");
-      final passwordFinder = find.text("PASSWORD");
-      final loginFinder = find.text("LOGIN");
-      final registrationFinder = find.text("REGISTRATION");
+      final usernameFinder = find.text("E-Mail");
+      final passwordFinder = find.text("Password");
+      final loginFinder = find.text("Login");
+      final registrationFinder = find.text("Registration");
 
-      expect(usernameFinder, findsOneWidget);
+      expect(usernameFinder, findsNWidgets(2));
       expect(passwordFinder, findsOneWidget);
       expect(loginFinder, findsOneWidget);
       expect(registrationFinder, findsOneWidget);
@@ -30,7 +28,7 @@ void main() {
       await tester.pumpWidget(TestHelper.buildPage(
           LoginView(), AuthModel(_IlaApiClientLogin(null, false))));
 
-      await tester.tap(find.text("LOGIN"));
+      await tester.tap(find.text("Login"));
 
       await tester.pump();
       expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
@@ -42,7 +40,7 @@ void main() {
           AuthModel(_IlaApiClientLogin(
               UserException(message: 'USEREXCEPTION'), false))));
 
-      await tester.tap(find.text("LOGIN"));
+      await tester.tap(find.text("Login"));
 
       await tester.pump();
       expect(find.text('USEREXCEPTION'), findsOneWidget);
@@ -54,7 +52,7 @@ void main() {
           LoginView(), AuthModel(IlaApiClient()),
           navigatorObserver: navigation));
 
-      await tester.tap(find.text('REGISTRATION'));
+      await tester.tap(find.text('Registration'));
       await tester.pumpAndSettle();
 
       verify(navigation.didPush(any, any));

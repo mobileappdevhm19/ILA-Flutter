@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ila/main.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/homeView.dart';
@@ -11,8 +12,10 @@ import '../testHelper.dart';
 void main() {
   group('HomeView', () {
     testWidgets('Texts', (WidgetTester tester) async {
+      coursesApi = _CourseApiMock();
+
       await tester.pumpWidget(TestHelper.buildPage(
-          HomeView(_CourseApiMock()), AuthModel(IlaApiClient())));
+          HomeView(), AuthModel(IlaApiClient())));
 
       await tester.pump();
 

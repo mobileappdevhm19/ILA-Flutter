@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ila/main.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/course/courseView.dart';
@@ -10,12 +11,12 @@ import '../../testHelper.dart';
 
 void main() {
   testWidgets('CourseView', (WidgetTester tester) async {
+    coursesApi = _CourseApiMock();
+    lecturesApi = _LecturesApiMock();
+
     await tester.pumpWidget(TestHelper.buildPage(
-        CourseView(
-            Course.fromJson(
-                {'title': 'CourseTitle1', 'description': 'abc', 'id': 0}),
-            _CourseApiMock(),
-            _LecturesApiMock()),
+        CourseView(Course.fromJson(
+            {'title': 'CourseTitle1', 'description': 'abc', 'id': 0})),
         AuthModel(IlaApiClient())));
 
     await tester.pump();

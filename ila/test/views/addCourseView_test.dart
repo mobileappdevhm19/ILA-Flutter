@@ -1,5 +1,6 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ila/main.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/course/addCourseView.dart';
@@ -9,8 +10,10 @@ import '../testHelper.dart';
 
 void main() {
   testWidgets('addCourseView', (WidgetTester tester) async {
+    coursesApi = _CourseApiMock();
+
     await tester.pumpWidget(TestHelper.buildPage(
-        AddCourseView(_CourseApiMock()), AuthModel(IlaApiClient())));
+        AddCourseView(), AuthModel(IlaApiClient())));
 
     await tester.pump();
 
