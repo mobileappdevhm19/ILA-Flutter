@@ -326,7 +326,7 @@ class _RegistrationViewState extends State<RegistrationView> {
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
-                                            "REGISTER",
+                                            "Register",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -364,16 +364,24 @@ class _RegistrationViewState extends State<RegistrationView> {
         .then((_) async {
       Navigator.of(context).pop();
       scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Please check your mails.'),
+        content: Text('Account created.'),
         duration: Duration(seconds: 4),
       ));
     }).catchError((e) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(e is UserException
-            ? (e as UserException).message
-            : 'Unbekannter Fehler ist aufgetretten'),
-        duration: Duration(seconds: 4),
-      ));
+      if (e is FormatException) {
+        Navigator.of(context).pop();
+        scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('Account created.'),
+          duration: Duration(seconds: 4),
+        ));
+      } else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(e is UserException
+              ? (e as UserException).message
+              : 'Unbekannter Fehler ist aufgetretten'),
+          duration: Duration(seconds: 4),
+        ));
+      }
     });
   }
 }
