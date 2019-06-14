@@ -25,11 +25,14 @@ class Course {
 
   List<CourseToken> tokens = [];
   
+
+  List<CourseNews> news = [];
+  
   Course();
 
   @override
   String toString() {
-    return 'Course[id=$id, title=$title, description=$description, archived=$archived, owner=$owner, members=$members, lectures=$lectures, tokens=$tokens, ]';
+    return 'Course[id=$id, title=$title, description=$description, archived=$archived, owner=$owner, members=$members, lectures=$lectures, tokens=$tokens, news=$news, ]';
   }
 
   Course.fromJson(Map<String, dynamic> json) {
@@ -60,6 +63,9 @@ class Course {
     tokens =
       CourseToken.listFromJson(json['tokens'])
 ;
+    news =
+      CourseNews.listFromJson(json['news'])
+;
   }
 
   Map<String, dynamic> toJson() {
@@ -71,7 +77,8 @@ class Course {
       'owner': owner,
       'members': members,
       'lectures': lectures,
-      'tokens': tokens
+      'tokens': tokens,
+      'news': news
      };
   }
 

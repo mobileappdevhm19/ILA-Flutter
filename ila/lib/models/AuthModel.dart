@@ -1,31 +1,46 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ila/helpers/userException.dart';
+import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AuthModel extends Model {
-  FlutterSecureStorage storage = FlutterSecureStorage();
+  FlutterSecureStorage storage;
 
-  AuthStatus getStatus() => defaultApiClient.getStatus();
+  AuthStatus getStatus() => getApiClient().getStatus();
+
+  IlaApiClient getApiClient() => (defaultApiClient as IlaApiClient);
+
+  AuthModel(IlaApiClient apiClient, {this.storage}) {
+    defaultApiClient = apiClient;
+    if(storage == null)
+      storage = FlutterSecureStorage();
+  }
 
   Future init() async {
-   try {
-      defaultApiClient.username = await storage.read(key: 'username');
-      defaultApiClient.password = await storage.read(key: 'password');
+    try {
+      getApiClient().username =
+          await storage.read(key: 'username');
+      getApiClient().password =
+          await storage.read(key: 'password');
     } catch (error) {
       // TODO error handling
     }
-    if (defaultApiClient.username != null &&
-        defaultApiClient.password != null) {
-      await defaultApiClient.login(
-          defaultApiClient.username, defaultApiClient.password);
+    if (getApiClient().username != null &&
+        getApiClient().password != null) {
+      await getApiClient().login(
+          getApiClient().username,
+          getApiClient().password);
     }
   }
 
   Future login(String username, String password) async {
     try {
-      await defaultApiClient.login(username, password);
-      await storage.write(key: 'username', value: defaultApiClient.username);
-      await storage.write(key: 'password', value: defaultApiClient.password);
+      await getApiClient().login(username, password);
+      await storage.write(
+          key: 'username', value: getApiClient().username);
+      await storage.write(
+          key: 'password', value: getApiClient().password);
     } catch (error) {
       try {
         storage.delete(key: 'username');
@@ -44,7 +59,7 @@ class AuthModel extends Model {
     try {
       await storage.delete(key: 'username');
       await storage.delete(key: 'password');
-      defaultApiClient.logout();
+      await getApiClient().logout();
     } catch (e) {
       // TODO error handling
     }
@@ -52,7 +67,7 @@ class AuthModel extends Model {
 
   getAccountInfo() {
     return {
-      'username': defaultApiClient.username,
+      'username': getApiClient().username,
     };
   }
 }

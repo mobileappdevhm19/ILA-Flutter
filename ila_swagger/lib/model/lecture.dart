@@ -20,6 +20,9 @@ class Lecture {
   DateTime stop = null;
   
 
+  int courseId = null;
+  
+
   Course course = null;
   
 
@@ -32,7 +35,7 @@ class Lecture {
 
   @override
   String toString() {
-    return 'Lecture[id=$id, title=$title, description=$description, visible=$visible, start=$start, stop=$stop, course=$course, pauses=$pauses, questions=$questions, ]';
+    return 'Lecture[id=$id, title=$title, description=$description, visible=$visible, start=$start, stop=$stop, courseId=$courseId, course=$course, pauses=$pauses, questions=$questions, ]';
   }
 
   Lecture.fromJson(Map<String, dynamic> json) {
@@ -51,6 +54,9 @@ class Lecture {
     ;
     start = json['start'] == null ? null : DateTime.parse(json['start']);
     stop = json['stop'] == null ? null : DateTime.parse(json['stop']);
+    courseId =
+        json['courseId']
+    ;
     course =
       
       
@@ -72,6 +78,7 @@ class Lecture {
       'visible': visible,
       'start': start == null ? '' : start.toUtc().toIso8601String(),
       'stop': stop == null ? '' : stop.toUtc().toIso8601String(),
+      'courseId': courseId,
       'course': course,
       'pauses': pauses,
       'questions': questions

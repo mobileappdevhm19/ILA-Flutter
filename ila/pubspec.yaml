@@ -25,12 +25,15 @@ dependencies:
   cupertino_icons: ^0.1.2
   scoped_model: any
   flutter_secure_storage: any
+  barcode_scan: any
+  jaguar_jwt: any
   ila_swagger:
     path: ../ila_swagger/
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: any
 
 
 # For information on the generic Dart part of this file, see the

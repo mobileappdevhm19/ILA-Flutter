@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
-import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
@@ -12,8 +12,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  String _username;
-  String _password;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class _LoginViewState extends State<LoginView> {
         ),
         body: Center(
             child: Builder(
-                builder: (context) =>
-                    ListView(
+                builder: (context) => ListView(
                       shrinkWrap: true,
                       padding: EdgeInsets.all(15.0),
                       children: <Widget>[
@@ -45,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "USERNAME",
+                                  "E-Mail",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -57,10 +56,7 @@ class _LoginViewState extends State<LoginView> {
                           ],
                         ),
                         new Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(
                               left: 40.0, right: 40.0, top: 10.0),
                           alignment: Alignment.center,
@@ -73,18 +69,18 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                           padding:
-                          const EdgeInsets.only(left: 0.0, right: 10.0),
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
-                                  onChanged: (value) => _username = value,
+                                  controller: _usernameController,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Benutzername',
+                                    hintText: 'E-Mail',
                                     hintStyle: TextStyle(color: Colors.grey),
                                   ),
                                 ),
@@ -101,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                               child: new Padding(
                                 padding: const EdgeInsets.only(left: 40.0),
                                 child: new Text(
-                                  "PASSWORD",
+                                  "Password",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Config.PrimaryColor,
@@ -113,10 +109,7 @@ class _LoginViewState extends State<LoginView> {
                           ],
                         ),
                         new Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(
                               left: 40.0, right: 40.0, top: 10.0),
                           alignment: Alignment.center,
@@ -129,15 +122,15 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                           padding:
-                          const EdgeInsets.only(left: 0.0, right: 10.0),
+                              const EdgeInsets.only(left: 0.0, right: 10.0),
                           child: new Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
+                                  controller: _passwordController,
                                   obscureText: true,
-                                  onChanged: (value) => _password = value,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -153,10 +146,7 @@ class _LoginViewState extends State<LoginView> {
                           height: 24.0,
                         ),
                         new Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(
                               left: 30.0, right: 30.0, top: 20.0),
                           alignment: Alignment.center,
@@ -166,7 +156,7 @@ class _LoginViewState extends State<LoginView> {
                                 child: new FlatButton(
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(30.0),
+                                        new BorderRadius.circular(4.0),
                                   ),
                                   color: Config.PrimaryColor,
                                   onPressed: () =>
@@ -178,11 +168,11 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                     child: new Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
-                                            "LOGIN",
+                                            "Login",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -198,10 +188,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                         new Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(
                               left: 30.0, right: 30.0, top: 20.0),
                           alignment: Alignment.center,
@@ -211,12 +198,11 @@ class _LoginViewState extends State<LoginView> {
                                 child: new FlatButton(
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
-                                    new BorderRadius.circular(30.0),
+                                        new BorderRadius.circular(4.0),
                                   ),
                                   color: Config.AppColorDark,
-                                  onPressed: () =>
-                                      Navigator.pushNamed(context,
-                                          '/registration'),
+                                  onPressed: () => Navigator.of(context)
+                                      .pushNamed('/registration'),
                                   child: new Container(
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 20.0,
@@ -224,11 +210,11 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                     child: new Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         new Expanded(
                                           child: Text(
-                                            "REGISTRATION",
+                                            "Registration",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -249,9 +235,8 @@ class _LoginViewState extends State<LoginView> {
 
   _loginButtonOnPressed(BuildContext context) async {
     var auth = ScopedModel.of<AuthModel>(context);
-
     await auth
-        .login(_username, _password)
+        .login(_usernameController.text, _passwordController.text)
         .then((_) => Navigator.pushReplacementNamed(context, '/home'))
         .catchError((e) {
       Scaffold.of(context).showSnackBar(SnackBar(
@@ -260,7 +245,6 @@ class _LoginViewState extends State<LoginView> {
             : 'Unbekannter Fehler ist aufgetretten'),
         duration: Duration(seconds: 4),
       ));
-      print(e.toString());
     });
   }
 }
