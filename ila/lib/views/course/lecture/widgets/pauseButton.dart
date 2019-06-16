@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class PauseButton extends StatefulWidget {
@@ -43,12 +44,17 @@ class _PauseButtonView extends State<PauseButton> {
                       .lecturesPostPause(widget.lectureId)
                       .catchError((error) {
                     if (error is ApiException && error.code == 481) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('you have to wait 2 min'),
-                        duration: Duration(seconds: 4),
-                      ));
+                      ILAToast.of(context).showToast(
+                        toastType: ToastType.warning,
+                        message: 'you have to wait 2 min',
+                      );
                     } else {
-                      // TODO: handle error
+                      ILAToast.of(context).showToast(
+                        toastType: ToastType.error,
+                        message: error is ApiException
+                            ? (error as ApiException).message
+                            : 'Unbekannter Fehler ist aufgetretten',
+                      );
                     }
                   }),
             ),

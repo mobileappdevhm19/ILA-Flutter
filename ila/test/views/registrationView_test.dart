@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
+import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/registrationView.dart';
 import 'package:ila_swagger/api.dart';
-import 'package:mockito/mockito.dart';
 
 import '../testHelper.dart';
 
@@ -38,9 +38,10 @@ void main() {
     await tester.enterText(find.byType(TextField).at(4), 'DEF');
 
     await tester.tap(find.text("Register"));
-    await tester.pump();
 
+    await tester.pumpAndSettle();
     expect(find.text('Passwords do not match.'), findsOneWidget);
+    await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
   });
 
   testWidgets('Registration error UserException', (WidgetTester tester) async {
@@ -57,14 +58,15 @@ void main() {
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
     await tester.tap(find.text('Register'));
-    await tester.pump();
 
+    await tester.pumpAndSettle();
     expect(find.text('USEREXCEPTION'), findsOneWidget);
+    await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
   });
 
   testWidgets('Registration error AnyException', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        RegistrationView(accountApi: _AccountApiMock(null, false)),
+        RegistrationView(accountApi: _AccountApiMock('ANY Exception', false)),
         AuthModel(IlaApiClient())));
 
     await tester.enterText(find.byType(TextField).at(0), 'FirstName');
@@ -74,9 +76,10 @@ void main() {
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
     await tester.tap(find.text('Register'));
-    await tester.pump();
 
+    await tester.pumpAndSettle();
     expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
+    await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
   });
   testWidgets('Registration successful', (WidgetTester tester) async {
     MockNavigatorObserver navigaton = MockNavigatorObserver();
@@ -92,7 +95,10 @@ void main() {
     await tester.enterText(find.byType(TextField).at(4), 'Password');
 
     await tester.tap(find.text('Register'));
+
     await tester.pumpAndSettle();
+    expect(find.text('Account created.'), findsOneWidget);
+    await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
   });
 }
 
