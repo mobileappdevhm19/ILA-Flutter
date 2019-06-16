@@ -39,13 +39,11 @@ class IlaApiClient extends ApiClient {
               .subtract(Duration(seconds: 30))
               .difference(DateTime.now().toUtc())
               .isNegative) {
-        print('update JWT');
         try {
           await login(username, password);
         } catch (error) {
           // TODO: redirect to login
         }
-        print('JWT updated');
       }
     }
 
@@ -123,7 +121,6 @@ class IlaApiClient extends ApiClient {
 
       _status = AuthStatus.LoggedIn;
     } catch (error) {
-      print(error);
       _status = AuthStatus.LoginFailed;
 
       this.username = null;
