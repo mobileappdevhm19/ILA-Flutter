@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/main.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:ila/helpers/errorPopupDialog.dart';
 
 class AddCourseView extends StatefulWidget {
   CoursesApi coursesApi;
@@ -32,25 +32,29 @@ class _AddCourseViewState extends State<AddCourseView> {
     } catch (error) {
       if (_id.toString() != _idController.text)
         _idController.text = _id.toString();
-      // TODO: handle error
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: error is UserException
+            ? (error as UserException).message
+            : 'Unbekannter Fehler ist aufgetretten',
+      );
     }
   }
 
   _registerButtonOnPressed(BuildContext context) async {
     widget.coursesApi.coursesJoin(_id, token: _tokenController.text).then((_) async {
       Navigator.pop(context);
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Course Added'),
-        duration: Duration(seconds: 4),
-      ));
+      ILAToast.of(context).showToast(
+        toastType: ToastType.success,
+        message:'Course Added',
+      );
     }).catchError((e) {
-      print(e.toString());
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(e is UserException
-            ? (e as UserException).message
-            : 'Unbekannter Fehler ist aufgetretten'),
-        duration: Duration(seconds: 4),
-      ));
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: e is ApiException
+            ? (e as ApiException).message
+            : 'Unbekannter Fehler ist aufgetretten',
+      );
     });
   }
 
@@ -67,20 +71,26 @@ class _AddCourseViewState extends State<AddCourseView> {
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         print('The user did not grant the camera permission!');
-        ErrorPopupDialogue.showErrorDialog(context,  "Camera Access Denied!",
-             'Please grant the camera permission!');
+        ILAToast.of(context).showToast(
+          toastType: ToastType.error,
+          message: 'Please grant the camera permission!',
+        );
       } else {
         print('Uknown error: $e');
-        ErrorPopupDialogue.showErrorDialog(context,  ErrorPopupDialogue.unknownT,
-            ErrorPopupDialogue.unknownB);
+        ILAToast.of(context).showToast(
+          toastType: ToastType.error,
+          message:'Ups, something went wrong! Please try again.'
+        );
       }
     } on FormatException {
       print(
           'null (User returned using the "back"-button before scanning anything. Result)s');
     } catch (e) {
       print('Uknown error: $e');
-      ErrorPopupDialogue.showErrorDialog(context,  ErrorPopupDialogue.unknownT,
-          ErrorPopupDialogue.unknownB);
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Ups, something went wrong! Please try again.',
+      );
     }
   }
 

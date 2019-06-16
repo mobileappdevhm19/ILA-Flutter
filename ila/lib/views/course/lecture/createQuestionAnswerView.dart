@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class CreateQuestionAnswerView extends StatefulWidget {
@@ -43,9 +44,19 @@ class _CreateQuestionAnswerViewState extends State<CreateQuestionAnswerView> {
               onPressed: () => widget.lecturesApi
                       .lecturesPostAnswer(widget.question.id,
                           AnswerCreate.fromJson({'comment': _controller.text}))
-                      .then((_) => Navigator.of(context).pop())
-                      .catchError((error) {
-                    //TODO: handle error
+                      .then((_) {
+                    Navigator.of(context).pop();
+                    ILAToast.of(context).showToast(
+                      toastType: ToastType.success,
+                      message: 'Antwort wurde gespeichert',
+                    );
+                  }).catchError((error) {
+                    ILAToast.of(context).showToast(
+                      toastType: ToastType.error,
+                      message: error is ApiException
+                          ? (error as ApiException).message
+                          : 'Unbekannter Fehler ist aufgetretten',
+                    );
                   }),
             ),
           ]))

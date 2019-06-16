@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/helpers/userException.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class HomeView extends StatefulWidget {
@@ -28,7 +30,10 @@ class _HomeViewState extends State<HomeView> {
         _isData = true;
       });
     }).catchError((error) {
-      // TODO handle error
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Unbekannter Fehler ist aufgetretten',
+      );
     });
   }
 

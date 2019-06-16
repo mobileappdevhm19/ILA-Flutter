@@ -4,6 +4,7 @@ import 'package:ila/helpers/routes.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/splashScreen.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -17,25 +18,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<AuthModel>(
-      model: AuthModel(apiClient),
-      child: MaterialApp(
-        title: Config.AppTitle,
-        theme: ThemeData(
-          primarySwatch: Config.PrimaryColor,
+    return ILAToast(
+      child: ScopedModel<AuthModel>(
+        model: AuthModel(apiClient),
+        child: MaterialApp(
+          title: Config.AppTitle,
+          theme: ThemeData(
+            primarySwatch: Config.PrimaryColor,
+          ),
+          home: SplashScreen(),
+          onGenerateRoute: (RouteSettings settings) {
+            return MaterialPageRoute(
+              builder: (BuildContext context) => makeRoute(
+                    context: context,
+                    routeName: settings.name,
+                    arguments: settings.arguments,
+                  ),
+              maintainState: true,
+              fullscreenDialog: false,
+            );
+          },
         ),
-        home: SplashScreen(),
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute(
-            builder: (BuildContext context) => makeRoute(
-              context: context,
-              routeName: settings.name,
-              arguments: settings.arguments,
-            ),
-            maintainState: true,
-            fullscreenDialog: false,
-          );
-        },
       ),
     );
   }

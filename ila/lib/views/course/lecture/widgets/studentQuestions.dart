@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class StudentQuestions extends StatefulWidget {
@@ -33,13 +34,15 @@ class _StudentQuestionsState extends State<StudentQuestions> {
       });
     }).catchError((error) {
       print(error.toString());
-      // TODO handle error
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Fehler ist aufgetretten',
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
       color: Colors.white70,
       child: Container(
@@ -116,8 +119,8 @@ class _StudentQuestionsState extends State<StudentQuestions> {
                       ),
                       RaisedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed('/lecture/questions/all',
+                          Navigator.of(context).pushNamed(
+                              '/lecture/questions/all',
                               arguments: widget.lecture.questions);
                         },
                         child: Text('Show All Questions'),

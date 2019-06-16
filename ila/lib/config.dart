@@ -31,4 +31,5 @@ class Config {
   static const AppColorDark = MaterialColor(0xff984AE3, _AppColorsDark);
 
   static const SplashScreenDuration = 10;
+  static const ToastDuration = 4;
 }

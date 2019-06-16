@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class ProfQuestionView extends StatefulWidget {
@@ -27,7 +28,10 @@ class _ProfQuestionViewState extends State<ProfQuestionView> {
       });
     }).catchError((error) {
       print(error.toString());
-      // TODO handle error
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Fehler ist aufgetretten',
+      );
     });
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
@@ -30,8 +31,9 @@ void main() {
 
       await tester.tap(find.text("Login"));
 
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
+      await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
     });
 
     testWidgets('Login failed UserException', (WidgetTester tester) async {
@@ -42,8 +44,9 @@ void main() {
 
       await tester.tap(find.text("Login"));
 
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.text('USEREXCEPTION'), findsOneWidget);
+      await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
     });
 
     testWidgets('Navigation - Registration', (WidgetTester tester) async {
