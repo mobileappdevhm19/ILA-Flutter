@@ -77,6 +77,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
+                                  key: ValueKey('emailKey'),
                                   controller: _usernameController,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
@@ -130,6 +131,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
+                                  key:ValueKey('passwordKey'),
                                   controller: _passwordController,
                                   obscureText: true,
                                   textAlign: TextAlign.left,
@@ -155,6 +157,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: new FlatButton(
+                                  key: ValueKey('loginKey'),
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
                                         new BorderRadius.circular(4.0),

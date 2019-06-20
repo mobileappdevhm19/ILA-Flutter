@@ -20,6 +20,7 @@ class _AllQuestionsViewState extends State<AllQuestionsView> {
           title: Text('All Questions'),
         ),
         body: ListView.separated(
+          key: ValueKey('allQuestionsList'),
             shrinkWrap: true,
             itemCount: widget.questions.length,
             itemBuilder: (context, index) {
