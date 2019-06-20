@@ -81,6 +81,27 @@ void main() {
     expect(find.text('Unbekannter Fehler ist aufgetretten'), findsOneWidget);
     await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
   });
+
+  testWidgets('Registration successful FormatException', (WidgetTester tester) async {
+    MockNavigatorObserver navigaton = MockNavigatorObserver();
+    await tester.pumpWidget(TestHelper.buildPage(
+        RegistrationView(accountApi: _AccountApiMock(FormatException(), false)),
+        AuthModel(IlaApiClient()),
+        navigatorObserver: navigaton));
+
+    await tester.enterText(find.byType(TextField).at(0), 'FirstName');
+    await tester.enterText(find.byType(TextField).at(1), 'LastName');
+    await tester.enterText(find.byType(TextField).at(2), 'test@email.com');
+    await tester.enterText(find.byType(TextField).at(3), 'Password');
+    await tester.enterText(find.byType(TextField).at(4), 'Password');
+
+    await tester.tap(find.text('Register'));
+
+    await tester.pumpAndSettle();
+    expect(find.text('Account created.'), findsOneWidget);
+    await tester.pumpAndSettle(Duration(seconds: Config.ToastDuration));
+  });
+
   testWidgets('Registration successful', (WidgetTester tester) async {
     MockNavigatorObserver navigaton = MockNavigatorObserver();
     await tester.pumpWidget(TestHelper.buildPage(
