@@ -8,8 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../../../testHelper.dart';
 
 void main() {
-
-  Question ques1 =Question.fromJson({
+  Question ques1 = Question.fromJson({
     'pointedQuestion': 'QUESTION',
     'answers': [
       {
@@ -20,7 +19,7 @@ void main() {
       },
     ]
   });
-  Question ques2 =Question.fromJson({
+  Question ques2 = Question.fromJson({
     'pointedQuestion': 'QUESTION2',
     'answers': [
       {
@@ -31,13 +30,12 @@ void main() {
       },
     ]
   });
-  List<Question> questions = [ques1,ques2];
+  List<Question> questions = [ques1, ques2];
   MockNavigatorObserver navigation = MockNavigatorObserver();
 
   testWidgets('AllQuestionsView', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        AllQuestionsView(questions),
-        AuthModel(IlaApiClient())));
+        AllQuestionsView(questions), AuthModel(IlaApiClient())));
 
     final titleFinder = find.text('All Questions');
     final questionFinder = find.text('QUESTION');
@@ -56,11 +54,10 @@ void main() {
     expect(answer22Finder, findsNothing);
   });
 
-
   testWidgets('AllQuestionsView Navigation', (WidgetTester tester) async {
     await tester.pumpWidget(TestHelper.buildPage(
-        AllQuestionsView(questions),
-        AuthModel(IlaApiClient()),navigatorObserver: navigation));
+        AllQuestionsView(questions), AuthModel(IlaApiClient()),
+        navigatorObserver: navigation));
 
     await tester.pump();
 
