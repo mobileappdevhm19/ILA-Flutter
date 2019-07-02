@@ -2,83 +2,31 @@ part of ila_swagger.api;
 
 
 
-class UserApi {
+class ProfQuestionApi {
   final ApiClient apiClient;
 
-  UserApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  ProfQuestionApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   /// 
   ///
   /// 
-  Future<MultipartFile> userDeleteToken({ String deviceId }) async {
+  Future<ProfQuestionAnswer> profQuestionAnswer(int answerId) async {
     Object postBody = null;
 
     // verify required params are set
+    if(answerId == null) {
+     throw new ApiException(400, "Missing required param: answerId");
+    }
 
     // create path and map variables
-    String path = "/api/User/token".replaceAll("{format}","json");
+    String path = "/api/ProfQuestion/{answerId}".replaceAll("{format}","json").replaceAll("{" + "answerId" + "}", answerId.toString());
 
     // query params
     List<QueryParam> queryParams = [];
     Map<String, String> headerParams = {};
     Map<String, String> formParams = {};
-    if(deviceId != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "deviceId", deviceId));
-    }
     
     List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["JWT"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-          }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'DELETE',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return 
-          apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile ;
-    } else {
-      return null;
-    }
-  }
-  /// 
-  ///
-  /// 
-  Future<PushTokens> userPostToken(SavePushToken model) async {
-    Object postBody = model;
-
-    // verify required params are set
-    if(model == null) {
-     throw new ApiException(400, "Missing required param: model");
-    }
-
-    // create path and map variables
-    String path = "/api/User/token".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    
-    List<String> contentTypes = ["application/json-patch+json","application/json","text/json","application/_*+json"];
 
     String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
     List<String> authNames = ["JWT"];
@@ -106,7 +54,7 @@ class UserApi {
       throw new ApiException(response.statusCode, response.body);
     } else if(response.body != null) {
       return 
-          apiClient.deserialize(response.body, 'PushTokens') as PushTokens ;
+          apiClient.deserialize(response.body, 'ProfQuestionAnswer') as ProfQuestionAnswer ;
     } else {
       return null;
     }
@@ -114,13 +62,16 @@ class UserApi {
   /// 
   ///
   /// 
-  Future<TestPush> userTestPush() async {
+  Future<List<ProfQuestion>> profQuestionGet(int lectureId) async {
     Object postBody = null;
 
     // verify required params are set
+    if(lectureId == null) {
+     throw new ApiException(400, "Missing required param: lectureId");
+    }
 
     // create path and map variables
-    String path = "/api/User/pushTest".replaceAll("{format}","json");
+    String path = "/api/ProfQuestion/{lectureId}".replaceAll("{format}","json").replaceAll("{" + "lectureId" + "}", lectureId.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -155,7 +106,7 @@ class UserApi {
       throw new ApiException(response.statusCode, response.body);
     } else if(response.body != null) {
       return 
-          apiClient.deserialize(response.body, 'TestPush') as TestPush ;
+        (apiClient.deserialize(response.body, 'List<ProfQuestion>') as List).map((item) => item as ProfQuestion).toList();
     } else {
       return null;
     }

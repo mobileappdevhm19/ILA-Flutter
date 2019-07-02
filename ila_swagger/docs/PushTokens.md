@@ -1,4 +1,4 @@
-# ila_swagger.model.Answer
+# ila_swagger.model.PushTokens
 
 ## Load the model package
 ```dart
@@ -9,12 +9,9 @@ import 'package:ila_swagger/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [default to null]
-**comment** | **String** |  | [default to null]
-**votes** | **int** |  | [default to 0]
-**createdAt** | [**DateTime**](DateTime.md) |  | [default to null]
+**token** | **String** |  | [optional] [default to null]
+**deviceId** | **String** |  | [optional] [default to null]
 **user** | [**ILAUser**](ILAUser.md) |  | [optional] [default to null]
-**questionId** | **int** |  | [default to null]
-**question** | [**Question**](Question.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

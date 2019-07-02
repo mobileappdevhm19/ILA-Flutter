@@ -4,9 +4,9 @@ import 'package:ila_swagger/api.dart';
 
 class CreateQuestionAnswerView extends StatefulWidget {
   final Question question;
-  final LecturesApi lecturesApi;
+  final QuestionApi questionApi;
 
-  const CreateQuestionAnswerView(this.lecturesApi, this.question);
+  const CreateQuestionAnswerView(this.questionApi, this.question);
 
   @override
   _CreateQuestionAnswerViewState createState() =>
@@ -41,8 +41,8 @@ class _CreateQuestionAnswerViewState extends State<CreateQuestionAnswerView> {
             FlatButton(
               child: const Text('Post question'),
               //Example for Posting to API via inline generated JSON
-              onPressed: () => widget.lecturesApi
-                      .lecturesPostAnswer(widget.question.id,
+              onPressed: () => widget.questionApi
+                      .questionPostAnswer(widget.question.id,
                           AnswerCreate.fromJson({'comment': _controller.text}))
                       .then((_) {
                     Navigator.of(context).pop();

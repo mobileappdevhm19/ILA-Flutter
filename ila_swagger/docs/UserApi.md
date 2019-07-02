@@ -1,4 +1,4 @@
-# ila_swagger.api.AccountApi
+# ila_swagger.api.UserApi
 
 ## Load the API package
 ```dart
@@ -9,13 +9,13 @@ All URIs are relative to *https://ila.dev.kirschbaum.bayern*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**accountLogout**](AccountApi.md#accountLogout) | **POST** /api/Account/logout | 
-[**accountSignIn**](AccountApi.md#accountSignIn) | **POST** /api/Account/login | 
-[**accountSignUp**](AccountApi.md#accountSignUp) | **POST** /api/Account/signup | 
+[**userDeleteToken**](UserApi.md#userDeleteToken) | **DELETE** /api/User/token | 
+[**userPostToken**](UserApi.md#userPostToken) | **POST** /api/User/token | 
+[**userTestPush**](UserApi.md#userTestPush) | **GET** /api/User/pushTest | 
 
 
-# **accountLogout**
-> MultipartFile accountLogout()
+# **userDeleteToken**
+> MultipartFile userDeleteToken(deviceId)
 
 
 
@@ -27,18 +27,22 @@ import 'package:ila_swagger/api.dart';
 // uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 //ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
 
-var api_instance = new AccountApi();
+var api_instance = new UserApi();
+var deviceId = deviceId_example; // String | 
 
 try { 
-    var result = api_instance.accountLogout();
+    var result = api_instance.userDeleteToken(deviceId);
     print(result);
 } catch (e) {
-    print("Exception when calling AccountApi->accountLogout: $e\n");
+    print("Exception when calling UserApi->userDeleteToken: $e\n");
 }
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deviceId** | **String**|  | [optional] 
 
 ### Return type
 
@@ -55,23 +59,27 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **accountSignIn**
-> JsonWebToken accountSignIn(request)
+# **userPostToken**
+> PushTokens userPostToken(model)
 
 
 
 ### Example 
 ```dart
 import 'package:ila_swagger/api.dart';
+// TODO Configure API key authorization: JWT
+//ila_swagger.api.Configuration.apiKey{'Authorization'} = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
 
-var api_instance = new AccountApi();
-var request = new SignIn(); // SignIn | 
+var api_instance = new UserApi();
+var model = new SavePushToken(); // SavePushToken | 
 
 try { 
-    var result = api_instance.accountSignIn(request);
+    var result = api_instance.userPostToken(model);
     print(result);
 } catch (e) {
-    print("Exception when calling AccountApi->accountSignIn: $e\n");
+    print("Exception when calling UserApi->userPostToken: $e\n");
 }
 ```
 
@@ -79,15 +87,15 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**SignIn**](SignIn.md)|  | 
+ **model** | [**SavePushToken**](SavePushToken.md)|  | 
 
 ### Return type
 
-[**JsonWebToken**](JsonWebToken.md)
+[**PushTokens**](PushTokens.md)
 
 ### Authorization
 
-No authorization required
+[JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -96,44 +104,44 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **accountSignUp**
-> MultipartFile accountSignUp(request)
+# **userTestPush**
+> TestPush userTestPush()
 
 
 
 ### Example 
 ```dart
 import 'package:ila_swagger/api.dart';
+// TODO Configure API key authorization: JWT
+//ila_swagger.api.Configuration.apiKey{'Authorization'} = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//ila_swagger.api.Configuration.apiKeyPrefix{'Authorization'} = "Bearer";
 
-var api_instance = new AccountApi();
-var request = new SignUp(); // SignUp | 
+var api_instance = new UserApi();
 
 try { 
-    var result = api_instance.accountSignUp(request);
+    var result = api_instance.userTestPush();
     print(result);
 } catch (e) {
-    print("Exception when calling AccountApi->accountSignUp: $e\n");
+    print("Exception when calling UserApi->userTestPush: $e\n");
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request** | [**SignUp**](SignUp.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**MultipartFile**](File.md)
+[**TestPush**](TestPush.md)
 
 ### Authorization
 
-No authorization required
+[JWT](../README.md#JWT)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
- - **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

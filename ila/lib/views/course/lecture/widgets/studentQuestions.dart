@@ -4,9 +4,9 @@ import 'package:ila_swagger/api.dart';
 
 class StudentQuestions extends StatefulWidget {
   final Lecture lecture;
-  final LecturesApi lecturesApi;
+  final QuestionApi questionApi;
 
-  StudentQuestions(this.lecturesApi, this.lecture);
+  StudentQuestions(this.questionApi, this.lecture);
 
   @override
   _StudentQuestionsState createState() => _StudentQuestionsState();
@@ -25,9 +25,7 @@ class _StudentQuestionsState extends State<StudentQuestions> {
   }
 
   _load() {
-    widget.lecturesApi
-        .lecturesGetQuestions(widget.lecture.id)
-        .then((questions) {
+    widget.questionApi.questionGetLecture(widget.lecture.id).then((questions) {
       _studentQuestions = questions;
       setState(() {
         _studentQuestionsisData = true;

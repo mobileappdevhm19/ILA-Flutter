@@ -60,6 +60,12 @@ class ApiClient {
           return new LectureCreateUpdateModel.fromJson(value);
         case 'Pause':
           return new Pause.fromJson(value);
+        case 'ProfAnswer':
+          return new ProfAnswer.fromJson(value);
+        case 'ProfQuestion':
+          return new ProfQuestion.fromJson(value);
+        case 'ProfQuestionAnswer':
+          return new ProfQuestionAnswer.fromJson(value);
         case 'PushTokens':
           return new PushTokens.fromJson(value);
         case 'Question':

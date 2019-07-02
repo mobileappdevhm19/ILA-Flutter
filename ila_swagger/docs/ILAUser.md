@@ -29,7 +29,9 @@ Name | Type | Description | Notes
 **memberCourses** | [**List&lt;CourseMember&gt;**](CourseMember.md) |  | [optional] [default to []]
 **pauses** | [**List&lt;Pause&gt;**](Pause.md) |  | [optional] [default to []]
 **questions** | [**List&lt;Question&gt;**](Question.md) |  | [optional] [default to []]
+**profAnswers** | [**List&lt;ProfQuestionAnswer&gt;**](ProfQuestionAnswer.md) |  | [optional] [default to []]
 **answers** | [**List&lt;Answer&gt;**](Answer.md) |  | [optional] [default to []]
+**pushTokens** | [**List&lt;PushTokens&gt;**](PushTokens.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
