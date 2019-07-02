@@ -45,16 +45,16 @@ Widget _buildRoute({
       return CourseView(course, CoursesApi(), LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(LecturesApi(), lecture);
+      return LectureView(LecturesApi(), QuestionApi(), lecture);
     case '/lecture/question':
       Question question = arguments as Question;
       return QuestionView(question);
     case '/lecture/question/answers/new':
       Question question = arguments as Question;
-      return CreateQuestionAnswerView(LecturesApi(), question);
+      return CreateQuestionAnswerView(QuestionApi(), question);
     case '/lecture/question/new':
       Lecture lecture = arguments as Lecture;
-      return CreateQuestionView(LecturesApi(), lecture);
+      return CreateQuestionView(QuestionApi(), lecture);
     case '/quesDetails':
       Question ques = arguments as Question;
       return QuestionView(ques);
