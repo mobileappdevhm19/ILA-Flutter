@@ -1,4 +1,4 @@
-# ila_swagger.model.Answer
+# ila_swagger.model.ProfAnswer
 
 ## Load the model package
 ```dart
@@ -9,12 +9,10 @@ import 'package:ila_swagger/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [default to null]
-**comment** | **String** |  | [default to null]
-**votes** | **int** |  | [default to 0]
-**createdAt** | [**DateTime**](DateTime.md) |  | [default to null]
-**user** | [**ILAUser**](ILAUser.md) |  | [optional] [default to null]
-**questionId** | **int** |  | [default to null]
-**question** | [**Question**](Question.md) |  | [optional] [default to null]
+**answer** | **String** |  | [default to null]
+**profQuestionId** | **int** |  | [default to null]
+**profQuestion** | [**ProfQuestion**](ProfQuestion.md) |  | [optional] [default to null]
+**profQuestionAnswers** | [**List&lt;ProfQuestionAnswer&gt;**](ProfQuestionAnswer.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

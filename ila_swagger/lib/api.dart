@@ -15,6 +15,8 @@ part 'auth/http_basic_auth.dart';
 part 'api/account_api.dart';
 part 'api/courses_api.dart';
 part 'api/lectures_api.dart';
+part 'api/prof_question_api.dart';
+part 'api/question_api.dart';
 part 'api/user_api.dart';
 
 part 'model/answer.dart';
@@ -28,6 +30,9 @@ part 'model/json_web_token.dart';
 part 'model/lecture.dart';
 part 'model/lecture_create_update_model.dart';
 part 'model/pause.dart';
+part 'model/prof_answer.dart';
+part 'model/prof_question.dart';
+part 'model/prof_question_answer.dart';
 part 'model/push_tokens.dart';
 part 'model/question.dart';
 part 'model/question_create.dart';
