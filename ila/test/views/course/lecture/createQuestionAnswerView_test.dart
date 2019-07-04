@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
-import 'package:ila/views/course/lecture/createQuestionView.dart';
+import 'package:ila/views/course/lecture/createQuestionAnswerView.dart';
 import 'package:ila_swagger/api.dart';
 
 import '../../../testHelper.dart';
@@ -9,18 +9,18 @@ import '../../../testHelper.dart';
 void main() {
   MockNavigatorObserver navigation = MockNavigatorObserver();
 
-  group('Student Questions Create View ', () {
+  group('Student Question Answers Create View ', () {
     testWidgets('Texts', (WidgetTester tester) async {
       await tester.pumpWidget(TestHelper.buildPage(
-          CreateQuestionView(
+          CreateQuestionAnswerView(
               _QuestionApi(),
-              Lecture.fromJson({
+              Question.fromJson({
                 'id': 1,
               })),
           AuthModel(IlaApiClient())));
-      final titleFinder = find.text('Create Question');
+      final titleFinder = find.text('Answer Question');
       final cancelFinder = find.text('Cancel');
-      final postFinder = find.text('Post question');
+      final postFinder = find.text('Post answer');
 
       expect(titleFinder, findsOneWidget);
       expect(cancelFinder, findsOneWidget);
