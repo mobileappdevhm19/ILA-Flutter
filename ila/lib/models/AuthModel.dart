@@ -4,13 +4,13 @@ import 'package:ila/helpers/userException.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:device_info/device_info.dart';
+//import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:device_info/device_info.dart';
 
 class AuthModel extends Model {
   FlutterSecureStorage storage;
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+  //FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  //final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
 
   String _fcmToken;
 
@@ -27,7 +27,7 @@ class AuthModel extends Model {
   Future init() async {
 
     // initialize firebase cloud messaging
-    if (Platform.isIOS) _iOS_Permission();
+    /*if (Platform.isIOS) _iOS_Permission();
 
     await _firebaseMessaging
         .getToken()
@@ -50,7 +50,7 @@ class AuthModel extends Model {
         print('on launch $message');
         // TODO: same like onResume
       },
-    );
+    );*/
 
     // load user credentials and login
     try {
@@ -63,7 +63,7 @@ class AuthModel extends Model {
       await getApiClient()
           .login(getApiClient().username, getApiClient().password);
       if (getStatus() == AuthStatus.LoggedIn) {
-        await _uploadFcmToken();
+        //await _uploadFcmToken();
       }
     }
   }
@@ -75,7 +75,7 @@ class AuthModel extends Model {
           key: 'username', value: (defaultApiClient as IlaApiClient).username);
       await storage.write(
           key: 'password', value: (defaultApiClient as IlaApiClient).password);
-      await _uploadFcmToken();
+      //await _uploadFcmToken();
     } catch (error) {
       try {
         storage.delete(key: 'username');
@@ -106,16 +106,16 @@ class AuthModel extends Model {
     };
   }
 
-  void _iOS_Permission() {
+  /*void _iOS_Permission() {
     _firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
       //TODO: anything to do?
     });
-  }
+  }*/
 
-  Future _uploadFcmToken() async {
+  /*Future _uploadFcmToken() async {
     print('try to update');
     if (_fcmToken == null || _fcmToken == '') return;
 
@@ -130,5 +130,5 @@ class AuthModel extends Model {
       'deviceId': deviceName,
     }));
     print('uupdated');
-  }
+  }*/
 }
