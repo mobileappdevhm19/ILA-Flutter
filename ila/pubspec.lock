@@ -150,7 +150,7 @@ packages:
   ila_swagger:
     dependency: "direct main"
     description:
-      path: "../ila_swagger"
+      path: "..\\ila_swagger"
       relative: true
     source: path
     version: "2.0.0"
@@ -455,4 +455,3 @@ packages:
     version: "2.1.16"
 sdks:
   dart: ">=2.1.0 <3.0.0"
-  flutter: ">=0.1.4 <2.0.0"

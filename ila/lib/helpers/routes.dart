@@ -20,6 +20,7 @@ import 'package:ila/views/settings/dataPolicyView.dart';
 LecturesApi lecturesApi = null;
 QuestionApi questionsApi = null;
 AccountApi accountApi = null;
+ProfQuestionApi profQuestionApi = null;
 
 Widget makeRoute(
     {@required BuildContext context,
@@ -51,13 +52,15 @@ Widget _buildRoute({
       return CourseView(course, CoursesApi(), lecturesApi ?? LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(lecturesApi ?? LecturesApi(), questionsApi ?? QuestionApi(),ProfQuestionApi(), lecture);
+      return LectureView(lecturesApi ?? LecturesApi(),
+          questionsApi ?? QuestionApi(), ProfQuestionApi(), lecture);
     case '/lecture/question':
       Question question = arguments as Question;
       return QuestionView(question);
     case '/lecture/profQuestion':
       ProfQuestion profQuestion = arguments as ProfQuestion;
-      return ProfQuestionView(profQuestion);
+      return ProfQuestionView(
+          profQuestion, profQuestionApi ?? ProfQuestionApi());
     case '/lecture/question/answers/new':
       Question question = arguments as Question;
       return CreateQuestionAnswerView(questionsApi ?? QuestionApi(), question);
@@ -68,8 +71,8 @@ Widget _buildRoute({
       List<Question> questions = arguments as List<Question>;
       return AllQuestionsView(questions);
     case '/lecture/profQuestions/all':
-      ProfessorQuestionWrapper wrapper = arguments as ProfessorQuestionWrapper;
-      return AllProfQuestionsView(wrapper);
+      Lecture lecture = arguments as Lecture;
+      return AllProfQuestionsView(lecture, profQuestionApi??ProfQuestionApi());
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
       return NewsDetailsView(news);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
-import 'package:ila/views/course/lecture/AllProfQuestionsView.dart';
 
 class ProfessorQuestions extends StatefulWidget {
   final Lecture lecture;
@@ -103,7 +102,7 @@ class _ProfessorQuestionsState extends State<ProfessorQuestions> {
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                               '/lecture/profQuestions/all',
-                              arguments: ProfessorQuestionWrapper(widget.lecture,widget.questionApi));
+                              arguments: widget.lecture);
                         },
                         child: Text('Show All Professor Questions'),
                         color: Colors.primaries[0],

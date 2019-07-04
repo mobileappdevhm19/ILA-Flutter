@@ -3,11 +3,11 @@ import 'package:ila/config.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:ila/widgets/ilaToast.dart';
 
-
 class ProfQuestionView extends StatefulWidget {
   final ProfQuestion question;
+  final ProfQuestionApi questionApi;
 
-  const ProfQuestionView(this.question);
+  const ProfQuestionView(this.question, this.questionApi);
 
   @override
   _ProfQuestionViewState createState() => _ProfQuestionViewState();
@@ -26,7 +26,7 @@ class _ProfQuestionViewState extends State<ProfQuestionView> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 25.0),
                   child: Text(
-                        "Professor Question",
+                    "Professor Question",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Config.PrimaryColor,
@@ -82,11 +82,27 @@ class _ProfQuestionViewState extends State<ProfQuestionView> {
                         horizontal: 2.0, vertical: 6.0),
                     child: ListTile(
                       title: Text(widget.question.answers[index].answer),
-                      onTap: () => {ILAToast.of(context).showToast(
-                      toastType: ToastType.info,
-                      message: 'You pushed answer'+widget.question.answers[index].id.toString(),
-                      )},
-
+                      onTap: () async {
+                        await this
+                            .widget
+                            .questionApi
+                            .profQuestionAnswer(
+                                widget.question.answers[index].id)
+                            .then((_) => ILAToast.of(context).showToast(
+                                  toastType: ToastType.info,
+                                  message: 'You pushed answer' +
+                                      widget.question.answers[index].id
+                                          .toString(),
+                                ))
+                            .catchError((error) {
+                          ILAToast.of(context).showToast(
+                            toastType: ToastType.error,
+                            message: error is ApiException
+                                ? (error as ApiException).message
+                                : 'Unbekannter Fehler ist aufgetretten',
+                          );
+                        });
+                      },
                     ),
                   ),
                 ),
