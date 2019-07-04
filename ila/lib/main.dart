@@ -44,18 +44,7 @@ class MyApp extends StatelessWidget {
               fullscreenDialog: false,
             );
           },
-        ),lder: (BuildContext context) => makeRoute(
-              context: context,
-              routeName: settings.name,
-              arguments: settings.arguments,
-               context: context,
-              routeName: settings.name,
-              arguments: settings.arguments,
-            ),
-            maintainState: true,
-            fullscreenDialog: false,
-          );
-        },
+        ),
       ),
     );
   }
