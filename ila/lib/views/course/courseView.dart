@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
-import 'package:ila/main.dart';
 import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 

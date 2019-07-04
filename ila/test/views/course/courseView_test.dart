@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ila/config.dart';
+import 'package:ila/helpers/routes.dart';
 import 'package:ila/models/AuthModel.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/course/courseView.dart';
 import 'package:ila_swagger/api.dart';
+import 'package:mockito/mockito.dart';
 
 import '../../testHelper.dart';
 
 void main() {
+  MockNavigatorObserver navigation = MockNavigatorObserver();
+
   group('CourseView', () {
     testWidgets('Texts long news', (WidgetTester tester) async {
       await tester.pumpWidget(TestHelper.buildPage(
@@ -43,7 +47,7 @@ void main() {
       final news2TitleFinder = find.text("Title2");
       final news1SubtitleFinder = find.text("Short Body...");
       final news2SubtitleFinder =
-      find.text("Very very very very very very ...");
+          find.text("Very very very very very very ...");
 
       final lectureTitleFinder = find.text("Lecture Title1");
 
@@ -91,6 +95,31 @@ void main() {
       expect(news1TitleFinder, findsOneWidget);
       expect(news1SubtitleFinder, findsOneWidget);
       expect(lectureTitleFinder, findsOneWidget);
+    });
+
+    testWidgets('Show all news', (WidgetTester tester) async {
+      lecturesApi = _LecturesApiMock();
+      questionsApi = _QuestionApi();
+
+      await tester.pumpWidget(TestHelper.buildPage(
+          CourseView(
+              Course.fromJson(
+                  {'title': 'CourseTitle1', 'description': 'abc', 'id': 0}),
+              _CourseApiMock([
+                {
+                  'title': 'Title1',
+                  'body': 'Short Body',
+                },
+              ]),
+              _LecturesApiMock()),
+          AuthModel(IlaApiClient()),
+          navigatorObserver: navigation));
+
+      await tester.pump();
+      await tester.tap(find.text('Show all news'));
+      await tester.pumpAndSettle();
+
+      verify(navigation.didPush(any, any));
     });
 
     testWidgets('Leave Course Texts', (WidgetTester tester) async {
@@ -154,5 +183,11 @@ class _LecturesApiMock extends LecturesApi {
         Lecture.fromJson({'title': 'Lecture Title2'}),
       ]);
     }
+  }
+}
+
+class _QuestionApi extends QuestionApi {
+  Future<List<Question>> questionGetLecture(int id) async {
+    return [];
   }
 }

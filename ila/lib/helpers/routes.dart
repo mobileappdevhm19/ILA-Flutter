@@ -15,6 +15,9 @@ import 'package:ila/views/settings/settingsView.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:ila/views/settings/dataPolicyView.dart';
 
+LecturesApi lecturesApi = null;
+QuestionApi questionsApi = null;
+
 Widget makeRoute(
     {@required BuildContext context,
     @required String routeName,
@@ -42,19 +45,20 @@ Widget _buildRoute({
       return SettingsView();
     case '/course':
       Course course = arguments as Course;
-      return CourseView(course, CoursesApi(), LecturesApi());
+      return CourseView(course, CoursesApi(), lecturesApi ?? LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(LecturesApi(), QuestionApi(), lecture);
+      return LectureView(
+          lecturesApi ?? LecturesApi(), questionsApi ?? QuestionApi(), lecture);
     case '/lecture/question':
       Question question = arguments as Question;
       return QuestionView(question);
     case '/lecture/question/answers/new':
       Question question = arguments as Question;
-      return CreateQuestionAnswerView(QuestionApi(), question);
+      return CreateQuestionAnswerView(questionsApi ?? QuestionApi(), question);
     case '/lecture/question/new':
       Lecture lecture = arguments as Lecture;
-      return CreateQuestionView(QuestionApi(), lecture);
+      return CreateQuestionView(questionsApi ?? QuestionApi(), lecture);
     case '/quesDetails':
       Question ques = arguments as Question;
       return QuestionView(ques);
