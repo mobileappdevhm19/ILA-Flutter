@@ -17,6 +17,7 @@ import 'package:ila/views/settings/dataPolicyView.dart';
 
 LecturesApi lecturesApi = null;
 QuestionApi questionsApi = null;
+AccountApi accountApi = null;
 
 Widget makeRoute(
     {@required BuildContext context,
@@ -38,7 +39,7 @@ Widget _buildRoute({
     case '/login':
       return LoginView();
     case '/registration':
-      return RegistrationView(accountApi: AccountApi());
+      return RegistrationView(accountApi: accountApi ?? AccountApi());
     case '/settings/dataPolicy':
       return DataPolicyView();
     case '/settings':
