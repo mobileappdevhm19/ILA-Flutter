@@ -39,7 +39,7 @@ class _CreateQuestionAnswerViewState extends State<CreateQuestionAnswerView> {
               },
             ),
             FlatButton(
-              child: const Text('Post question'),
+              child: const Text('Post answer'),
               //Example for Posting to API via inline generated JSON
               onPressed: () => widget.questionApi
                       .questionPostAnswer(widget.question.id,
