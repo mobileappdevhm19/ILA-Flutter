@@ -6,6 +6,8 @@ import 'package:ila/swagger/ilaApiClient.dart';
 import 'package:ila/views/splashScreen.dart';
 import 'package:ila/widgets/ilaToast.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -23,6 +25,9 @@ class MyApp extends StatelessWidget {
         model: AuthModel(apiClient),
         child: MaterialApp(
           title: Config.AppTitle,
+          navigatorObservers: <NavigatorObserver>[
+            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())
+          ],
           theme: ThemeData(
             primarySwatch: Config.PrimaryColor,
           ),

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>898078467383-t7d7co19aalkjb3v9ud88k1hodvf47li.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.898078467383-t7d7co19aalkjb3v9ud88k1hodvf47li</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC60mxWgrlXV6ETUrbVQ6Tl911JHjM4I1A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>898078467383</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.vonkirschbaum.ila</string>
+	<key>PROJECT_ID</key>
+	<string>interactive-lecture-assi-6c3e2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>interactive-lecture-assi-6c3e2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:898078467383:ios:07cf8838511ee97b</string>
+	<key>DATABASE_URL</key>
+	<string>https://interactive-lecture-assi-6c3e2.firebaseio.com</string>
+</dict>
+</plist>
