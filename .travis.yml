@@ -55,7 +55,9 @@ matrix:
         - git clone https://github.com/flutter/flutter.git -b stable
       script:
         - cd ./ila/
-        - ../flutter/bin/flutter -v build apk
+        - ../flutter/bin/flutter doctor -v
+        - ../flutter/bin/flutter packages get
+        - ../flutter/bin/flutter -v build apk --debug
 
     - os: osx
       language: generic
@@ -71,7 +73,11 @@ matrix:
         - brew install ios-deploy
         - git clone https://github.com/flutter/flutter.git -b stable
       script:
-        - cd ./ila/
+        - cd ./ila/ios/
+        - pod update
+        - pod repo update
+        - pod install
+        - cd ../
         - ../flutter/bin/flutter -v build ios --no-codesign
 
 cache:
