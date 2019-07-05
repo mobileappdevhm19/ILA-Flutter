@@ -1,11 +1,22 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart';
+import 'package:ila/helpers/routes.dart';
 import 'package:ila/swagger/ilaApiClient.dart';
+import 'package:ila_swagger/api.dart';
 
 main() {
   group('IlaApiClient', () {
-    group('', () {
-      // TODO ISSUE: 72
+    group('logout', () {
+      test('logout', () {
+        accountApi = _AccountApi();
+        IlaApiClient apiClient = IlaApiClient();
+        expect(apiClient.getStatus(), AuthStatus.None);
+        apiClient.logout();
+        expect(apiClient.getStatus(), AuthStatus.None);
+      });
+      //TODO: logout error tests
     });
+
     group('JWT', () {
       test('fromJsonString', () {
         var jwt = JWT.fromJsonString({
@@ -27,4 +38,10 @@ main() {
       });
     });
   });
+}
+
+class _AccountApi extends AccountApi {
+  Future<MultipartFile> accountLogout() async {
+    return null;
+  }
 }

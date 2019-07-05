@@ -11,13 +11,22 @@ class CourseNews {
   String body = null;
   
 
+  DateTime createdAt = null;
+  
+
+  String bodyTrimmed = null;
+  
+
+  int courseId = null;
+  
+
   Course course = null;
   
   CourseNews();
 
   @override
   String toString() {
-    return 'CourseNews[id=$id, title=$title, body=$body, course=$course, ]';
+    return 'CourseNews[id=$id, title=$title, body=$body, createdAt=$createdAt, bodyTrimmed=$bodyTrimmed, courseId=$courseId, course=$course, ]';
   }
 
   CourseNews.fromJson(Map<String, dynamic> json) {
@@ -31,6 +40,13 @@ class CourseNews {
     body =
         json['body']
     ;
+    createdAt = json['createdAt'] == null ? null : DateTime.parse(json['createdAt']);
+    bodyTrimmed =
+        json['bodyTrimmed']
+    ;
+    courseId =
+        json['courseId']
+    ;
     course =
       
       
@@ -43,6 +59,9 @@ class CourseNews {
       'id': id,
       'title': title,
       'body': body,
+      'createdAt': createdAt == null ? '' : createdAt.toUtc().toIso8601String(),
+      'bodyTrimmed': bodyTrimmed,
+      'courseId': courseId,
       'course': course
      };
   }

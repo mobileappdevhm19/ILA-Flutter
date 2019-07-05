@@ -11,6 +11,9 @@ class Answer {
   int votes = 0;
   
 
+  DateTime createdAt = null;
+  
+
   ILAUser user = null;
   
 
@@ -23,7 +26,7 @@ class Answer {
 
   @override
   String toString() {
-    return 'Answer[id=$id, comment=$comment, votes=$votes, user=$user, questionId=$questionId, question=$question, ]';
+    return 'Answer[id=$id, comment=$comment, votes=$votes, createdAt=$createdAt, user=$user, questionId=$questionId, question=$question, ]';
   }
 
   Answer.fromJson(Map<String, dynamic> json) {
@@ -37,6 +40,7 @@ class Answer {
     votes =
         json['votes']
     ;
+    createdAt = json['createdAt'] == null ? null : DateTime.parse(json['createdAt']);
     user =
       
       
@@ -57,6 +61,7 @@ class Answer {
       'id': id,
       'comment': comment,
       'votes': votes,
+      'createdAt': createdAt == null ? '' : createdAt.toUtc().toIso8601String(),
       'user': user,
       'questionId': questionId,
       'question': question

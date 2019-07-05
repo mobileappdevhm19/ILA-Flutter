@@ -1,90 +1,114 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
 import 'package:ila_swagger/api.dart';
+import 'package:ila/widgets/ilaToast.dart';
 
 class ProfQuestionView extends StatefulWidget {
-  Lecture lecture;
+  final ProfQuestion question;
+  final ProfQuestionApi questionApi;
 
-  ProfQuestionView({this.lecture});
-
+  const ProfQuestionView(this.question, this.questionApi);
 
   @override
   _ProfQuestionViewState createState() => _ProfQuestionViewState();
 }
 
 class _ProfQuestionViewState extends State<ProfQuestionView> {
-  bool _isData = false;
-  List<Question> _questions;
-
-  @override
-  void initState() {
-    super.initState();
-
-    LecturesApi().lecturesGetQuestions(widget.lecture.id).then((questions) {
-      _questions = questions;
-      setState(() {
-        _isData = true;
-      });
-    }).catchError((error) {
-      print(error.toString());
-      // TODO handle error
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.lecture.title),
-      ),
-      body: Builder(
-        builder: (context) => Container(
-          padding: EdgeInsets.only(top: 15),
-          child: Column(
+      appBar: AppBar(title: Text('Professor Question')),
+      body: ListView(
+        children: <Widget>[
+          Row(
             children: <Widget>[
-              Row(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Text(
+                    "Professor Question",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Config.PrimaryColor,
+                      fontSize: 25.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Card(
+            child: Container(
+              margin: new EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 2.0, vertical: 6.0),
+              child: Row(
                 children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 25.0),
-                      child: Text(
-                        "Questions",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Config.PrimaryColor,
-                          fontSize: 25.0,
-                        ),
-                      ),
+                  Container(
+                    child: Text(
+                      widget.question.question,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Divider(
-                  height: 24.0,
+            ),
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Text(
+                    "Answer Choices",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Config.PrimaryColor,
+                      fontSize: 25.0,
+                    ),
+                  ),
                 ),
               ),
-              _isData
-                  ? ListView.separated(
-                shrinkWrap: true,
-                itemCount: _questions.length,
-                itemBuilder: (context, index) {
-                  //TODO title: Text(_questions[index].title),
-                Padding(
-                padding:
-                const EdgeInsets.fromLTRB(12.0, 6.0, 12.0, 12.0),
-                child: Text(
-                _questions[index].pointedQuestion,
-                style: TextStyle(fontSize: 18.0),
-                )
-                );}
-
-              )
-                  : Center(child: CircularProgressIndicator())
             ],
           ),
-        ),
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: widget.question.answers.length,
+            itemBuilder: (context, index) => Card(
+                  child: Container(
+                    margin: new EdgeInsets.symmetric(
+                        vertical: 4.0, horizontal: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 2.0, vertical: 6.0),
+                    child: ListTile(
+                      title: Text(widget.question.answers[index].answer),
+                      onTap: () async {
+                        await this
+                            .widget
+                            .questionApi
+                            .profQuestionAnswer(
+                                widget.question.answers[index].id)
+                            .then((_) => ILAToast.of(context).showToast(
+                                  toastType: ToastType.info,
+                                  message: 'You pushed answer' +
+                                      widget.question.answers[index].id
+                                          .toString(),
+                                ))
+                            .catchError((error) {
+                          ILAToast.of(context).showToast(
+                            toastType: ToastType.error,
+                            message: error is ApiException
+                                ? (error as ApiException).message
+                                : 'Unbekannter Fehler ist aufgetretten',
+                          );
+                        });
+                      },
+                    ),
+                  ),
+                ),
+            separatorBuilder: (context, index) => Divider(),
+          ),
+        ],
       ),
     );
   }

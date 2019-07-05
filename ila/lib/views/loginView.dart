@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila/models/AuthModel.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
@@ -76,6 +77,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
+                                  key: ValueKey('emailKey'),
                                   controller: _usernameController,
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
@@ -129,6 +131,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: TextField(
+                                  key:ValueKey('passwordKey'),
                                   controller: _passwordController,
                                   obscureText: true,
                                   textAlign: TextAlign.left,
@@ -154,6 +157,7 @@ class _LoginViewState extends State<LoginView> {
                             children: <Widget>[
                               new Expanded(
                                 child: new FlatButton(
+                                  key: ValueKey('loginKey'),
                                   shape: new RoundedRectangleBorder(
                                     borderRadius:
                                         new BorderRadius.circular(4.0),
@@ -239,12 +243,12 @@ class _LoginViewState extends State<LoginView> {
         .login(_usernameController.text, _passwordController.text)
         .then((_) => Navigator.pushReplacementNamed(context, '/home'))
         .catchError((e) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(e is UserException
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: e is UserException
             ? (e as UserException).message
-            : 'Unbekannter Fehler ist aufgetretten'),
-        duration: Duration(seconds: 4),
-      ));
+            : 'Unbekannter Fehler ist aufgetretten',
+      );
     });
   }
 }

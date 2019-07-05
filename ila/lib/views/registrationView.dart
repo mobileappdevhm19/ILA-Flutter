@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ila/helpers/userException.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 import '../config.dart';
 import '../main.dart';
@@ -347,10 +348,10 @@ class _RegistrationViewState extends State<RegistrationView> {
 
   _registerButtonOnPressed(BuildContext context) async {
     if (_password2.text != _password.text) {
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text('Passwords do not match.'),
-        duration: Duration(seconds: 4),
-      ));
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Passwords do not match.',
+      );
       return;
     }
 
@@ -363,24 +364,24 @@ class _RegistrationViewState extends State<RegistrationView> {
     }))
         .then((_) async {
       Navigator.of(context).pop();
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Account created.'),
-        duration: Duration(seconds: 4),
-      ));
+      ILAToast.of(context).showToast(
+        toastType: ToastType.success,
+        message: 'Account created.',
+      );
     }).catchError((e) {
       if (e is FormatException) {
         Navigator.of(context).pop();
-        scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('Account created.'),
-          duration: Duration(seconds: 4),
-        ));
+        ILAToast.of(context).showToast(
+          toastType: ToastType.success,
+          message: 'Account created.',
+        );
       } else {
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(e is UserException
+        ILAToast.of(context).showToast(
+          toastType: ToastType.error,
+          message: e is UserException
               ? (e as UserException).message
-              : 'Unbekannter Fehler ist aufgetretten'),
-          duration: Duration(seconds: 4),
-        ));
+              : 'Unbekannter Fehler ist aufgetretten',
+        );
       }
     });
   }

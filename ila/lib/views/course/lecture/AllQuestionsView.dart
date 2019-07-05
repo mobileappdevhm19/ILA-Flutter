@@ -20,6 +20,7 @@ class _AllQuestionsViewState extends State<AllQuestionsView> {
           title: Text('All Questions'),
         ),
         body: ListView.separated(
+          key: ValueKey('allQuestionsList'),
             shrinkWrap: true,
             itemCount: widget.questions.length,
             itemBuilder: (context, index) {
@@ -36,7 +37,7 @@ class _AllQuestionsViewState extends State<AllQuestionsView> {
                 subtitle: Text(subtitle),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () => Navigator.of(context).pushNamed(
-                  '/quesDetails',
+                  '/lecture/question',
                   arguments: ques,
                 ),
               );

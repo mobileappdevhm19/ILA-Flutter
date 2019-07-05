@@ -1,0 +1,21 @@
+# ila_swagger.model.ProfQuestion
+
+## Load the model package
+```dart
+import 'package:ila_swagger/api.dart';
+```
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **int** |  | [default to null]
+**title** | **String** |  | [default to null]
+**question** | **String** |  | [default to null]
+**createdAt** | [**DateTime**](DateTime.md) |  | [default to null]
+**lectureId** | **int** |  | [default to null]
+**lecture** | [**Lecture**](Lecture.md) |  | [optional] [default to null]
+**answers** | [**List&lt;ProfAnswer&gt;**](ProfAnswer.md) |  | [optional] [default to []]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

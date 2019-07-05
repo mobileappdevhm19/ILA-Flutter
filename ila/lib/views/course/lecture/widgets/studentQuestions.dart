@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class StudentQuestions extends StatefulWidget {
   final Lecture lecture;
-  final LecturesApi lecturesApi;
+  final QuestionApi questionApi;
 
-  StudentQuestions(this.lecturesApi, this.lecture);
+  StudentQuestions(this.questionApi, this.lecture);
 
   @override
   _StudentQuestionsState createState() => _StudentQuestionsState();
@@ -24,22 +25,22 @@ class _StudentQuestionsState extends State<StudentQuestions> {
   }
 
   _load() {
-    widget.lecturesApi
-        .lecturesGetQuestions(widget.lecture.id)
-        .then((questions) {
+    widget.questionApi.questionGetLecture(widget.lecture.id).then((questions) {
       _studentQuestions = questions;
       setState(() {
         _studentQuestionsisData = true;
       });
     }).catchError((error) {
       print(error.toString());
-      // TODO handle error
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Fehler ist aufgetretten',
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
       color: Colors.white70,
       child: Container(
@@ -116,8 +117,8 @@ class _StudentQuestionsState extends State<StudentQuestions> {
                       ),
                       RaisedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed('/lecture/questions/all',
+                          Navigator.of(context).pushNamed(
+                              '/lecture/questions/all',
                               arguments: widget.lecture.questions);
                         },
                         child: Text('Show All Questions'),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class CreateQuestionAnswerView extends StatefulWidget {
   final Question question;
-  final LecturesApi lecturesApi;
+  final QuestionApi questionApi;
 
-  const CreateQuestionAnswerView(this.lecturesApi, this.question);
+  const CreateQuestionAnswerView(this.questionApi, this.question);
 
   @override
   _CreateQuestionAnswerViewState createState() =>
@@ -38,14 +39,24 @@ class _CreateQuestionAnswerViewState extends State<CreateQuestionAnswerView> {
               },
             ),
             FlatButton(
-              child: const Text('Post question'),
+              child: const Text('Post answer'),
               //Example for Posting to API via inline generated JSON
-              onPressed: () => widget.lecturesApi
-                      .lecturesPostAnswer(widget.question.id,
+              onPressed: () => widget.questionApi
+                      .questionPostAnswer(widget.question.id,
                           AnswerCreate.fromJson({'comment': _controller.text}))
-                      .then((_) => Navigator.of(context).pop())
-                      .catchError((error) {
-                    //TODO: handle error
+                      .then((_) {
+                    Navigator.of(context).pop();
+                    ILAToast.of(context).showToast(
+                      toastType: ToastType.success,
+                      message: 'Antwort wurde gespeichert',
+                    );
+                  }).catchError((error) {
+                    ILAToast.of(context).showToast(
+                      toastType: ToastType.error,
+                      message: error is ApiException
+                          ? (error as ApiException).message
+                          : 'Unbekannter Fehler ist aufgetretten',
+                    );
                   }),
             ),
           ]))

@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [default to null]
 **pointedQuestion** | **String** |  | [default to null]
+**title** | **String** |  | [default to null]
+**createdAt** | [**DateTime**](DateTime.md) |  | [default to null]
+**lectureId** | **int** |  | [default to null]
 **lecture** | [**Lecture**](Lecture.md) |  | [optional] [default to null]
 **user** | [**ILAUser**](ILAUser.md) |  | [optional] [default to null]
 **answers** | [**List&lt;Answer&gt;**](Answer.md) |  | [optional] [default to []]

@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:ila/helpers/routes.dart';
 import 'package:ila/helpers/userException.dart';
 import 'package:ila_swagger/api.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
@@ -39,29 +40,27 @@ class IlaApiClient extends ApiClient {
               .subtract(Duration(seconds: 30))
               .difference(DateTime.now().toUtc())
               .isNegative) {
-        print('update JWT');
         try {
           await login(username, password);
         } catch (error) {
           // TODO: redirect to login
         }
-        print('JWT updated');
       }
     }
 
     _updateParamsForAuth(authNames, queryParams, headerParams);
 
-    var ps = queryParams.where((p) => p.value != null).map((p) => '${p.name}=${p.value}');
-    String queryString = ps.isNotEmpty ?
-    '?' + ps.join('&') :
-    '';
+    var ps = queryParams
+        .where((p) => p.value != null)
+        .map((p) => '${p.name}=${p.value}');
+    String queryString = ps.isNotEmpty ? '?' + ps.join('&') : '';
 
     String url = basePath + path + queryString;
 
     headerParams.addAll(_defaultHeaderMap);
     headerParams['Content-Type'] = contentType;
 
-    if(body is MultipartRequest) {
+    if (body is MultipartRequest) {
       var request = new MultipartRequest(method, Uri.parse(url));
       request.fields.addAll(body.fields);
       request.files.addAll(body.files);
@@ -70,8 +69,10 @@ class IlaApiClient extends ApiClient {
       var response = await client.send(request);
       return Response.fromStream(response);
     } else {
-      var msgBody = contentType == "application/x-www-form-urlencoded" ? formParams : serialize(body);
-      switch(method) {
+      var msgBody = contentType == "application/x-www-form-urlencoded"
+          ? formParams
+          : serialize(body);
+      switch (method) {
         case "POST":
           return client.post(url, headers: headerParams, body: msgBody);
         case "PUT":
@@ -109,7 +110,7 @@ class IlaApiClient extends ApiClient {
   Future login(String username, String password) async {
     _status = AuthStatus.Login;
     try {
-      var response = await AccountApi().accountSignIn(
+      var response = await (accountApi ?? AccountApi()).accountSignIn(
           SignIn.fromJson({'username': username, 'password': password}));
 
       final decoded =
@@ -123,7 +124,6 @@ class IlaApiClient extends ApiClient {
 
       _status = AuthStatus.LoggedIn;
     } catch (error) {
-      print(error);
       _status = AuthStatus.LoginFailed;
 
       this.username = null;
@@ -141,7 +141,7 @@ class IlaApiClient extends ApiClient {
 
   Future logout() async {
     try {
-      await AccountApi().accountLogout();
+      await (accountApi ?? AccountApi()).accountLogout();
       username = null;
       password = null;
       jwt = null;

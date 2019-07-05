@@ -31,11 +31,14 @@ class Lecture {
 
   List<Question> questions = [];
   
+
+  List<ProfQuestion> profQuestions = [];
+  
   Lecture();
 
   @override
   String toString() {
-    return 'Lecture[id=$id, title=$title, description=$description, visible=$visible, start=$start, stop=$stop, courseId=$courseId, course=$course, pauses=$pauses, questions=$questions, ]';
+    return 'Lecture[id=$id, title=$title, description=$description, visible=$visible, start=$start, stop=$stop, courseId=$courseId, course=$course, pauses=$pauses, questions=$questions, profQuestions=$profQuestions, ]';
   }
 
   Lecture.fromJson(Map<String, dynamic> json) {
@@ -68,6 +71,9 @@ class Lecture {
     questions =
       Question.listFromJson(json['questions'])
 ;
+    profQuestions =
+      ProfQuestion.listFromJson(json['profQuestions'])
+;
   }
 
   Map<String, dynamic> toJson() {
@@ -81,7 +87,8 @@ class Lecture {
       'courseId': courseId,
       'course': course,
       'pauses': pauses,
-      'questions': questions
+      'questions': questions,
+      'profQuestions': profQuestions
      };
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ila/config.dart';
 import 'package:ila/helpers/userException.dart';
-import 'package:ila/main.dart';
+import 'package:ila/widgets/ilaToast.dart';
 import 'package:ila_swagger/api.dart';
 
 class CourseView extends StatefulWidget {
@@ -31,7 +31,11 @@ class _CourseViewState extends State<CourseView> {
       });
     }).catchError((error) {
       print(error.toString());
-      // TODO handle error
+      // TODO: remote logging
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Fehler ist aufgetretten',
+      );
     });
     widget.lecturesApi.lecturesGetAll(widget.course.id).then((lectures) {
       _lectures = lectures;
@@ -40,7 +44,11 @@ class _CourseViewState extends State<CourseView> {
       });
     }).catchError((error) {
       print(error.toString());
-      // TODO handle error
+      // TODO: remote logging
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: 'Fehler ist aufgetretten',
+      );
     });
   }
 
@@ -210,18 +218,18 @@ class _CourseViewState extends State<CourseView> {
   _leaveButtonOnPressed(BuildContext context) async {
     widget.coursesApi.coursesLeave(widget.course.id).then((_) async {
       Navigator.pushNamed(context, '/home');
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Course Removed'),
-        duration: Duration(seconds: 4),
-      ));
+      ILAToast.of(context).showToast(
+        toastType: ToastType.info,
+        message: 'Course Removed',
+      );
     }).catchError((e) {
       print(e.toString());
-      Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(e is UserException
+      ILAToast.of(context).showToast(
+        toastType: ToastType.error,
+        message: e is UserException
             ? (e as UserException).message
-            : 'Unbekannter Fehler ist aufgetretten'),
-        duration: Duration(seconds: 4),
-      ));
+            : 'Unbekannter Fehler ist aufgetretten',
+      );
     });
   }
 }

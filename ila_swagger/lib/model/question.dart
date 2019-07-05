@@ -8,6 +8,12 @@ class Question {
   String pointedQuestion = null;
   
 
+  String title = null;
+  
+
+  DateTime createdAt = null;
+  
+
   int lectureId = null;
   
 
@@ -23,7 +29,7 @@ class Question {
 
   @override
   String toString() {
-    return 'Question[id=$id, pointedQuestion=$pointedQuestion, lectureId=$lectureId, lecture=$lecture, user=$user, answers=$answers, ]';
+    return 'Question[id=$id, pointedQuestion=$pointedQuestion, title=$title, createdAt=$createdAt, lectureId=$lectureId, lecture=$lecture, user=$user, answers=$answers, ]';
   }
 
   Question.fromJson(Map<String, dynamic> json) {
@@ -34,6 +40,10 @@ class Question {
     pointedQuestion =
         json['pointedQuestion']
     ;
+    title =
+        json['title']
+    ;
+    createdAt = json['createdAt'] == null ? null : DateTime.parse(json['createdAt']);
     lectureId =
         json['lectureId']
     ;
@@ -56,6 +66,8 @@ class Question {
     return {
       'id': id,
       'pointedQuestion': pointedQuestion,
+      'title': title,
+      'createdAt': createdAt == null ? '' : createdAt.toUtc().toIso8601String(),
       'lectureId': lectureId,
       'lecture': lecture,
       'user': user,

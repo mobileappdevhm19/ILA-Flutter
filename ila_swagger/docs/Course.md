@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **members** | [**List&lt;CourseMember&gt;**](CourseMember.md) |  | [optional] [default to []]
 **lectures** | [**List&lt;Lecture&gt;**](Lecture.md) |  | [optional] [default to []]
 **tokens** | [**List&lt;CourseToken&gt;**](CourseToken.md) |  | [optional] [default to []]
+**news** | [**List&lt;CourseNews&gt;**](CourseNews.md) |  | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
