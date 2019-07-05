@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ila/views/course/lecture/widgets/pauseButton.dart';
 import 'package:ila/views/course/lecture/widgets/studentQuestions.dart';
+import 'package:ila/views/course/lecture/widgets/professorQuestions.dart';
 import 'package:ila_swagger/api.dart';
 
 class LectureView extends StatefulWidget {
   Lecture lecture;
   final LecturesApi lecturesApi;
   final QuestionApi questionApi;
+  final ProfQuestionApi profQuestionApi;
 
-  LectureView(this.lecturesApi, this.questionApi, this.lecture);
+  LectureView(
+      this.lecturesApi, this.questionApi, this.profQuestionApi, this.lecture);
 
   @override
   _LectureViewState createState() => _LectureViewState();
@@ -31,6 +34,8 @@ class _LectureViewState extends State<LectureView> {
                       shrinkWrap: true,
                       children: <Widget>[
                         PauseButton(widget.lecturesApi, widget.lecture.id),
+                        ProfessorQuestions(
+                            widget.profQuestionApi, widget.lecture),
                         StudentQuestions(widget.questionApi, widget.lecture),
                       ],
                     )

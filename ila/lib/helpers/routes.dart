@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ila/views/course/addCourseView.dart';
 import 'package:ila/views/course/courseView.dart';
 import 'package:ila/views/course/lecture/AllQuestionsView.dart';
+import 'package:ila/views/course/lecture/AllProfQuestionsView.dart';
 import 'package:ila/views/course/lecture/createQuestionAnswerView.dart';
 import 'package:ila/views/course/lecture/createQuestionView.dart';
 import 'package:ila/views/course/lecture/questionView.dart';
+import 'package:ila/views/course/lecture/profQuestionView.dart';
 import 'package:ila/views/course/news/newsDetailsView.dart';
 import 'package:ila/views/course/news/newsView.dart';
 import 'package:ila/views/homeView.dart';
@@ -18,6 +20,7 @@ import 'package:ila/views/settings/dataPolicyView.dart';
 LecturesApi lecturesApi = null;
 QuestionApi questionsApi = null;
 AccountApi accountApi = null;
+ProfQuestionApi profQuestionApi = null;
 
 Widget makeRoute(
     {@required BuildContext context,
@@ -49,23 +52,27 @@ Widget _buildRoute({
       return CourseView(course, CoursesApi(), lecturesApi ?? LecturesApi());
     case '/lecture':
       Lecture lecture = arguments as Lecture;
-      return LectureView(
-          lecturesApi ?? LecturesApi(), questionsApi ?? QuestionApi(), lecture);
+      return LectureView(lecturesApi ?? LecturesApi(),
+          questionsApi ?? QuestionApi(), ProfQuestionApi(), lecture);
     case '/lecture/question':
       Question question = arguments as Question;
       return QuestionView(question);
+    case '/lecture/profQuestion':
+      ProfQuestion profQuestion = arguments as ProfQuestion;
+      return ProfQuestionView(
+          profQuestion, profQuestionApi ?? ProfQuestionApi());
     case '/lecture/question/answers/new':
       Question question = arguments as Question;
       return CreateQuestionAnswerView(questionsApi ?? QuestionApi(), question);
     case '/lecture/question/new':
       Lecture lecture = arguments as Lecture;
       return CreateQuestionView(questionsApi ?? QuestionApi(), lecture);
-    case '/quesDetails':
-      Question ques = arguments as Question;
-      return QuestionView(ques);
     case '/lecture/questions/all':
       List<Question> questions = arguments as List<Question>;
       return AllQuestionsView(questions);
+    case '/lecture/profQuestions/all':
+      Lecture lecture = arguments as Lecture;
+      return AllProfQuestionsView(lecture, profQuestionApi??ProfQuestionApi());
     case '/newsDetails':
       CourseNews news = arguments as CourseNews;
       return NewsDetailsView(news);

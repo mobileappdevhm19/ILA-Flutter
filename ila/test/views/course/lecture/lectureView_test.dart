@@ -10,7 +10,7 @@ void main() {
   group('LectureView', () {
     testWidgets('Texts', (WidgetTester tester) async {
       await tester.pumpWidget(TestHelper.buildPage(
-          LectureView(_LecturesApi(), _QuestionApi(),
+          LectureView(_LecturesApi(), _QuestionApi(),_ProfQuestionApi(),
               Lecture.fromJson({'id': 1, 'title': 'LectureTitle'})),
           AuthModel(IlaApiClient())));
 
@@ -25,6 +25,12 @@ class _LecturesApi extends LecturesApi {}
 
 class _QuestionApi extends QuestionApi {
   Future<List<Question>> questionGetLecture(int id) async {
+    return [];
+  }
+}
+
+class _ProfQuestionApi extends ProfQuestionApi {
+  Future<List<ProfQuestion>> profQuestionGet(int lectureId) async {
     return [];
   }
 }

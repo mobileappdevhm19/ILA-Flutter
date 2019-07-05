@@ -37,7 +37,7 @@ class _AllQuestionsViewState extends State<AllQuestionsView> {
                 subtitle: Text(subtitle),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () => Navigator.of(context).pushNamed(
-                  '/quesDetails',
+                  '/lecture/question',
                   arguments: ques,
                 ),
               );
