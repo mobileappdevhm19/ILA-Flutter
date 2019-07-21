@@ -17,17 +17,13 @@ void main() {
       print(health.status);
     });
     test('Check starting Screen', () async {
+      await takeScreenshot(driver, 'screenshots/starting_screen.png');
       await driver.waitFor(find.text('ILA'));
       //await driver.waitFor(find.text('Copyright'));
-      //      await driver.waitFor(find.text('Copyright ILA 2019'));
-      //TODO this could be fixed by by testing only loading screen
-      // this would break the principle of testing a whole workflow
-
+      //      await driver.waitFor(find.text('Copyright ILA 2019'))
     });
 
     test('Login Screen', () async {
-      //await driver.waitFor(find.text('Login'));
-      //TODO: Explain intended functionality and bug
       await driver.waitFor(find.text('E-Mail'));
       await driver.waitFor(find.text('Password'));
       await driver.tap(find.byValueKey('emailKey'));
@@ -36,7 +32,7 @@ void main() {
       await driver.waitFor(find.text('*********'));
       await driver.tap(find.byValueKey('passwordKey'));
       await driver.enterText('123');
-      //await driver.waitFor(find.text('···'));
+      await takeScreenshot(driver, 'screenshots/enter_text.png');
 
     });
     test('Login (Navigate to Homescreen)', () async {
@@ -76,7 +72,7 @@ void main() {
       }
       });*/
 
-      test('Ceck all questions (List)View', () async{
+      test('Check all questions (List)View', () async{
         final listFinder = find.byValueKey('allQuestionsList');
         final itemFinder = find.text('Bulkitem no.29');
 
@@ -88,8 +84,8 @@ void main() {
           itemFinder,
           dyScroll: -900.0,
         );
-
         expect(await driver.getText(itemFinder), 'Bulkitem no.29');
+        await takeScreenshot(driver, 'Bulkitem no.29.png');
     });
         // Convert the Timeline into a TimelineSummary that's easier to read and
 // understand.

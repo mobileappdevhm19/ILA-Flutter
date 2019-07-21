@@ -59,7 +59,8 @@ class _CourseViewState extends State<CourseView> {
           title: Text(widget.course.title),
         ),
         body: Builder(
-          builder: (context) => Container(
+          builder: (context) => SingleChildScrollView(
+            child: Container(
                 padding: EdgeInsets.only(top: 15),
                 child: Column(
                   children: <Widget>[
@@ -193,7 +194,7 @@ class _CourseViewState extends State<CourseView> {
                   ],
                 ),
               ),
-        ),
+        ),),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.remove),
           onPressed: () => showDialog(

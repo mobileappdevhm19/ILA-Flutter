@@ -24,7 +24,8 @@ class _LectureViewState extends State<LectureView> {
       appBar: AppBar(
         title: Text(widget.lecture.title),
       ),
-      body: Builder(
+      body:SingleChildScrollView(
+      child: Builder(
         builder: (context) => Container(
               padding: EdgeInsets.only(top: 15),
               child: SingleChildScrollView(
@@ -34,16 +35,16 @@ class _LectureViewState extends State<LectureView> {
                       shrinkWrap: true,
                       children: <Widget>[
                         PauseButton(widget.lecturesApi, widget.lecture.id),
+                        StudentQuestions(widget.questionApi, widget.lecture),
                         ProfessorQuestions(
                             widget.profQuestionApi, widget.lecture),
-                        StudentQuestions(widget.questionApi, widget.lecture),
                       ],
                     )
                   ],
                 ),
               ),
             ),
-      ),
+      ),),
     );
   }
 }
